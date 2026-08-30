@@ -98,9 +98,16 @@ window.DDScenarioList = window.DDQuests;
 })();
 
 (() => {
-  if ([...document.scripts].some(s => (s.getAttribute('src') || '').includes('dd-ui-patch.js'))) return;
-  const script = document.createElement('script');
-  script.src = 'js/dd-ui-patch.js?v=20260830-1';
-  script.async = true;
-  document.head.appendChild(script);
+  if (![...document.scripts].some(s => (s.getAttribute('src') || '').includes('dd-ui-patch.js'))) {
+    const script = document.createElement('script');
+    script.src = 'js/dd-ui-patch.js?v=20260830-1';
+    script.async = true;
+    document.head.appendChild(script);
+  }
+  if (![...document.scripts].some(s => (s.getAttribute('src') || '').includes('dd-death-retry.js'))) {
+    const script = document.createElement('script');
+    script.src = 'js/dd-death-retry.js?v=20260830-1';
+    script.async = true;
+    document.head.appendChild(script);
+  }
 })();
