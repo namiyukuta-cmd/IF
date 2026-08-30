@@ -63,6 +63,8 @@ window.DDScenarioList = window.DDQuests;
     if (options.start) {
       const runtime = await ensureRuntime();
       await runtime.start(id, !!options.reset);
+      const layer = document.getElementById('windowLayer');
+      if (layer) layer.hidden = true;
     }
     return scenario;
   }
