@@ -98,7 +98,7 @@
     if(window.DDBattle)return Promise.resolve(window.DDBattle);
     if(battlePromise)return battlePromise;
     battlePromise=new Promise((resolve,reject)=>{
-      const s=document.createElement('script');s.src='js/dd-battle.js?v=20260830-1';s.async=true;s.onload=()=>resolve(window.DDBattle);s.onerror=()=>reject(new Error('戦闘機能を読み込めませんでした。'));document.head.appendChild(s);
+      const s=document.createElement('script');s.src='js/dd-battle.js?v=20260830-2';s.async=true;s.onload=()=>resolve(window.DDBattle);s.onerror=()=>reject(new Error('戦闘機能を読み込めませんでした。'));document.head.appendChild(s);
     });
     return battlePromise;
   }
@@ -118,7 +118,7 @@
       const selected=(scene.combat.monsterIds||[]).map(mid=>monsters.find(v=>v.id===mid)).filter(Boolean);
       const map=maps.find(v=>v.id===scene.mapId)||null;
       root.dataset.combatReady=String(pending.sceneId);
-      root.innerHTML=`<div class="scenario-result">戦闘：${escapeHtml(selected.map(v=>`${v.name} ×${v.count||1}`).join(' / '))}</div><button id="startScenarioBattle" class="scenario-action" type="button">戦闘開始</button>`;
+      root.innerHTML=`<div class="scenario-result">戦闘：${escapeHtml(selected.map(v=>`${v.ja||v.name} ×${v.count||1}`).join(' / '))}</div><button id="startScenarioBattle" class="scenario-action" type="button">戦闘開始</button>`;
       $('startScenarioBattle')?.addEventListener('click',async()=>{const engine=await ensureBattle();await engine.start({scenarioId:id,scene,monsters:selected,map});});
     }catch(error){console.error(error);}
   }
