@@ -14,18 +14,21 @@ window.DDBattle = (() => {
     const style=document.createElement('style');
     style.id='ddBattleStyle';
     style.textContent=`
-      .battle-wrap{display:grid;gap:7px;padding-bottom:12px}
-      .battle-map{position:relative;width:min(100%,340px);aspect-ratio:1;margin:0 auto;border:2px solid #6d563d;border-radius:7px;overflow:hidden;background:#ddd}
+      .battle-wrap{display:grid;gap:5px;padding-bottom:4px}
+      .battle-map{position:relative;width:min(100%,180px);height:180px;margin:0 auto;border:2px solid #6d563d;border-radius:7px;overflow:hidden;background:#ddd}
       .battle-map img{width:100%;height:100%;display:block;object-fit:cover}
-      .battle-status{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
-      .battle-card{min-width:0;border:1px solid #a58a65;border-radius:6px;background:#f4e3c5;padding:5px 6px;font-size:11px;line-height:1.2}
-      .battle-card strong{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-      .battle-hp{margin-top:3px;font-weight:850}
-      .battle-log{min-height:48px;max-height:78px;overflow:auto;border-left:3px solid #8a6b48;background:#e5d1b1;padding:5px 7px;font-size:11px;line-height:1.35}
-      .battle-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
-      .battle-actions button{min-height:42px;border:1px solid #806849;border-radius:7px;background:#ead4ae;color:#352719;padding:5px 7px;font-size:12px;font-weight:850}
+      .battle-status{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+      .battle-card{min-width:0;border:1px solid #a58a65;border-radius:6px;background:#f4e3c5;padding:4px 5px;font-size:10px;line-height:1.15}
+      .battle-card strong{display:block;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .battle-hp{margin-top:2px;font-weight:850}
+      .battle-log{min-height:38px;max-height:52px;overflow:auto;border-left:3px solid #8a6b48;background:#e5d1b1;padding:4px 6px;font-size:10px;line-height:1.25}
+      .battle-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+      .battle-actions button{min-height:38px;border:1px solid #806849;border-radius:7px;background:#ead4ae;color:#352719;padding:4px 6px;font-size:11px;font-weight:850}
       .battle-actions .wide{grid-column:1/-1}
-      .battle-turn{font-size:11px;font-weight:850;text-align:center;color:#5f482f}
+      .battle-turn{font-size:10px;font-weight:850;text-align:center;color:#5f482f}
+      #windowContent img{max-width:100%;max-height:180px;width:auto!important;height:auto!important;object-fit:contain;display:block;margin:0 auto}
+      #windowContent .map-card img{max-height:105px}
+      @media(max-height:760px){.battle-map{width:145px;height:145px}.battle-log{max-height:44px}}
     `;
     document.head.appendChild(style);
   }
@@ -96,31 +99,16 @@ window.DDBattle = (() => {
   }
 
   function currentActor(){ return battle.order?.[battle.turnIndex]||null; }
-  function advance(){
-    battle.turnIndex++;
-    if(battle.turnIndex>=battle.order.length){battle.turnIndex=0;battle.round++;}
-    runAutomaticTurns();
-  }
+  function advance(){ battle.turnIndex++; if(battle.turnIndex>=battle.order.length){battle.turnIndex=0;battle.round++;} runAutomaticTurns(); }
 
-  function targetDamage(target,amount){
-    amount=Math.max(0,Math.floor(amount));
-    if(target==='pc') battle.pcHp=Math.max(0,battle.pcHp-amount);
-    else battle.thalgarHp=Math.max(0,battle.thalgarHp-amount);
-  }
-
-  function enemyTarget(){
-    const choices=[];
-    if(battle.pcHp>0) choices.push('pc');
-    if(battle.thalgarHp>0) choices.push('thalgar');
-    return choices.length?choices[Math.floor(Math.random()*choices.length)]:null;
-  }
+  function targetDamage(target,amount){ amount=Math.max(0,Math.floor(amount)); if(target==='pc') battle.pcHp=Math.max(0,battle.pcHp-amount); else battle.thalgarHp=Math.max(0,battle.thalgarHp-amount); }
+  function enemyTarget(){ const choices=[]; if(battle.pcHp>0) choices.push('pc'); if(battle.thalgarHp>0) choices.push('thalgar'); return choices.length?choices[Math.floor(Math.random()*choices.length)]:null; }
 
   function enemyTurn(enemy){
     if(!enemy||enemy.hp<=0) return;
     const target=enemyTarget(); if(!target) return;
     const targetName=target==='pc'?'あなた':'Thalgar';
     const game=getGame(); const character=game.character||{};
-
     if(enemy.breath && (enemy.breathReady || (enemy.breath.firstRound && battle.round===1 && !enemy.breathUsed))){
       enemy.breathUsed=true; enemy.breathReady=false;
       for(const t of ['pc','thalgar']){
@@ -131,52 +119,29 @@ window.DDBattle = (() => {
       }
       return;
     }
-    if(enemy.breath && enemy.breathUsed){
-      const r=d20(); if((enemy.breath.recharge||[]).includes(r)) enemy.breathReady=true;
-    }
-
+    if(enemy.breath && enemy.breathUsed){ const r=d20(); if((enemy.breath.recharge||[]).includes(r)) enemy.breathReady=true; }
     if(enemy.special?.once && !enemy.specialUsed){
-      enemy.specialUsed=true;
-      const sm=target==='pc'?saveMod(character,enemy.special.saveAbility):1;
-      const r=d20()+sm;
-      if(r<enemy.special.dc){
-        if(target==='pc') battle.pcStunned=1; else battle.thalgarStunned=1;
-        log(`${enemy.label}の${enemy.special.name}：${targetName} ${r}/${enemy.special.dc} → 次の手番を失う`);
-      }else log(`${enemy.label}の${enemy.special.name}：${targetName} ${r}/${enemy.special.dc} → 成功`);
+      enemy.specialUsed=true; const sm=target==='pc'?saveMod(character,enemy.special.saveAbility):1; const r=d20()+sm;
+      if(r<enemy.special.dc){ if(target==='pc') battle.pcStunned=1; else battle.thalgarStunned=1; log(`${enemy.label}の${enemy.special.name}：${targetName} ${r}/${enemy.special.dc} → 次の手番を失う`); }
+      else log(`${enemy.label}の${enemy.special.name}：${targetName} ${r}/${enemy.special.dc} → 成功`);
       return;
     }
-
     if(enemy.special?.kind==='gaze' && !enemy.gazeUsed){
-      enemy.gazeUsed=true;
-      const sm=target==='pc'?saveMod(character,'con'):5;
-      const r=d20()+sm;
+      enemy.gazeUsed=true; const sm=target==='pc'?saveMod(character,'con'):5; const r=d20()+sm;
       if(r<enemy.special.dc){const dmg=rollExpr(enemy.special.damage);targetDamage(target,dmg);if(target==='pc')battle.pcStunned=1;else battle.thalgarStunned=1;log(`${enemy.label}の${enemy.special.name}：${targetName} ${r}/${enemy.special.dc} → ${dmg}ダメージ`);}else log(`${enemy.label}の${enemy.special.name}：${targetName} ${r}/${enemy.special.dc} → 成功`);
     }
-
     const ac=target==='pc'?pcAc(game):15;
-    for(const atk of enemy.attacks||[]){
-      for(let i=0;i<Number(atk.count||1);i++){
-        const r=d20()+Number(atk.toHit||0);
-        if(r>=ac){const dmg=rollExpr(atk.damage);targetDamage(target,dmg);log(`${enemy.label} ${atk.name}：${targetName} AC${ac}に ${r} → ${dmg}ダメージ`);}else log(`${enemy.label} ${atk.name}：${targetName} AC${ac}に ${r} → ミス`);
-      }
-    }
+    for(const atk of enemy.attacks||[]){ for(let i=0;i<Number(atk.count||1);i++){ const r=d20()+Number(atk.toHit||0); if(r>=ac){const dmg=rollExpr(atk.damage);targetDamage(target,dmg);log(`${enemy.label} ${atk.name}：${targetName} AC${ac}に ${r} → ${dmg}ダメージ`);}else log(`${enemy.label} ${atk.name}：${targetName} AC${ac}に ${r} → ミス`); } }
   }
 
   function thalgarTurn(){
     if(battle.thalgarHp<=0) return;
     if(battle.thalgarStunned){battle.thalgarStunned=0;log('Thalgarは行動できない。');return;}
     const target=aliveEnemies()[0]; if(!target) return;
-    for(let i=0;i<2&&target.hp>0;i++){
-      const r=d20()+6;
-      if(r>=target.ac){const dmg=rollExpr('1d12+3');target.hp=Math.max(0,target.hp-dmg);log(`Thalgarのグレートアックス：${target.label} AC${target.ac}に ${r} → ${dmg}ダメージ`);}else log(`Thalgarのグレートアックス：${target.label}に ${r} → ミス`);
-    }
+    for(let i=0;i<2&&target.hp>0;i++){ const r=d20()+6; if(r>=target.ac){const dmg=rollExpr('1d12+3');target.hp=Math.max(0,target.hp-dmg);log(`Thalgarのグレートアックス：${target.label} AC${target.ac}に ${r} → ${dmg}ダメージ`);}else log(`Thalgarのグレートアックス：${target.label}に ${r} → ミス`); }
   }
 
-  function battleEnded(){
-    if(!aliveEnemies().length){ finishVictory(); return true; }
-    if(battle.pcHp<=0 && battle.thalgarHp<=0){ finishDefeat(); return true; }
-    return false;
-  }
+  function battleEnded(){ if(!aliveEnemies().length){ finishVictory(); return true; } if(battle.pcHp<=0 && battle.thalgarHp<=0){ finishDefeat(); return true; } return false; }
 
   function runAutomaticTurns(){
     if(battleEnded()) return;
@@ -203,13 +168,10 @@ window.DDBattle = (() => {
   }
 
   function finishVictory(){
-    const game=getGame();
-    game.character.hp=battle.pcHp;
-    const scenario=window.DDScenarios?.[battle.scenarioId];
+    const game=getGame(); game.character.hp=battle.pcHp;
     game.scenarioStates ||= {}; game.scenarioStates[battle.scenarioId] ||= {};
     game.scenarioStates[battle.scenarioId].thalgarHp=battle.thalgarHp>0?battle.thalgarHp:1;
-    game.pendingCombat=null; saveGame(game);
-    battle.finished='win'; log('戦闘勝利。'); render();
+    game.pendingCombat=null; saveGame(game); battle.finished='win'; log('戦闘勝利。'); render();
   }
 
   function finishDefeat(){
@@ -229,16 +191,12 @@ window.DDBattle = (() => {
     for(const e of battle.enemies)cards.push(`<div class="battle-card"><strong>${esc(e.label)}</strong><div class="battle-hp">HP ${e.hp}/${e.maxHp} / AC ${e.ac}</div></div>`);
     root.innerHTML=`<div class="battle-wrap"><div class="battle-map">${battle.map?.image?`<img src="${esc(battle.map.image)}" alt="${esc(battle.map.name||'戦闘マップ')}">`:''}</div><div class="battle-status">${cards.join('')}</div><div class="battle-turn">${battle.order?`Round ${battle.round}　${turn?.kind==='pc'?'あなたの手番':turn?.kind==='thalgar'?'Thalgarの手番':'敵の手番'}`:'戦闘開始前'}</div><div class="battle-log">${battle.log.slice(-5).map(esc).join('<br>')||'イニシアチブを振って戦闘を開始します。'}</div><div class="battle-actions" id="battleActions"></div></div>`;
     const actions=$('battleActions');
-    if(battle.finished==='win'){
-      const b=document.createElement('button');b.className='wide';b.textContent='戦闘終了 → 次へ';b.onclick=()=>window.DDScenarioRuntime?.gotoScene(battle.onWin);actions.appendChild(b);return;
-    }
+    if(battle.finished==='win'){ const b=document.createElement('button');b.className='wide';b.textContent='戦闘終了 → 次へ';b.onclick=()=>window.DDScenarioRuntime?.gotoScene(battle.onWin);actions.appendChild(b);return; }
     if(battle.finished==='lose'){const b=document.createElement('button');b.className='wide';b.textContent='クエスト失敗';b.disabled=true;actions.appendChild(b);return;}
     if(!battle.order){const b=document.createElement('button');b.className='wide';b.textContent='イニシアチブを振る';b.onclick=()=>{createOrder(getGame());runAutomaticTurns();};actions.appendChild(b);return;}
     if(turn?.kind==='pc'){
       if(battle.pcHp<=0){const b=document.createElement('button');b.className='wide';b.textContent='死亡セーヴを振る';b.onclick=()=>{const r=d20();log(`死亡セーヴ：${r} → ${r>=10?'成功':'失敗'}`);battle.deathSuccess=(battle.deathSuccess||0)+(r>=10?1:0);battle.deathFail=(battle.deathFail||0)+(r<10?1:0);if(battle.deathSuccess>=3){battle.pcHp=1;log('意識を取り戻した。');}if(battle.deathFail>=3){battle.pcHp=0;battle.pcDead=true;}advance();};actions.appendChild(b);return;}
-      for(const e of aliveEnemies()){
-        const b=document.createElement('button');b.textContent=`攻撃 → ${e.label}`;b.onclick=()=>playerAttack(e.id);actions.appendChild(b);
-      }
+      for(const e of aliveEnemies()){ const b=document.createElement('button');b.textContent=`攻撃 → ${e.label}`;b.onclick=()=>playerAttack(e.id);actions.appendChild(b); }
     }
   }
 
