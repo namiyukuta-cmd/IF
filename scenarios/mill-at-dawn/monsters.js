@@ -5,7 +5,7 @@ window.DDScenarioData['mill-at-dawn'].monsters = [
     id:'MON_MILL_GIANT_RAT',
     name:'Giant Rat',
     ja:'ジャイアント・ラット',
-    count:2,
+    count:1,
     combat:true,
     cr:'1/8',
     ac:12,
