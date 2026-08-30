@@ -8,26 +8,20 @@ terms:{'Cantrip':'キャントリップ（初級呪文）','Skill Proficiency':'
 label(value,group){const m=this[group]||{};return m[value]?`${value}（${m[value]}）`:value;}
 };
 
-(()=>{
-  if(document.getElementById('dd-new-mobile-font-fix')) return;
-  const style=document.createElement('style');
-  style.id='dd-new-mobile-font-fix';
-  style.textContent=`
-    body{font-size:15px!important;line-height:1.5!important}
-    .rules-note,.lead,.mini-note,.status,.field,.info-box{font-size:15px!important;line-height:1.5!important}
-    .info-box strong,.class-choice-head strong{font-size:16px!important}
-    .section-title{font-size:19px!important}
-    .subhead{font-size:17px!important}
-    .check-card span,.radio-card span,input,select,textarea,.nav-actions button,.small-btn{font-size:15px!important}
-    .check-card small,.radio-card small,.class-choice-count{font-size:14px!important}
-    .step-dot{font-size:12px!important;min-height:42px!important}
-    header h1{font-size:20px!important}
-    .back{font-size:19px!important;width:42px!important;height:42px!important}
-    .check-card,.radio-card{min-height:50px!important;padding:9px!important}
-    form{padding:12px!important}
-    .info-box{padding:10px!important;margin:8px 0 13px!important}
-    .nav-actions{padding-top:8px!important;padding-bottom:calc(8px + env(safe-area-inset-bottom))!important}
-    .nav-actions button{min-height:48px!important}
-  `;
-  document.head.appendChild(style);
-})();
+setTimeout(()=>{
+ const sel=document.getElementById('className'),info=document.getElementById('classInfo'),equip=document.getElementById('classEquipment');if(!sel||!info||!equip)return;
+ const panel=sel.closest('.step-panel'),title=panel.querySelector('.section-title'),lead=panel.querySelector('.lead'),field=sel.closest('.field'),equipTitle=equip.previousElementSibling;
+ const st=document.createElement('style');st.id='dd-new-mobile-font-fix';st.textContent=`body{font-size:14px!important;line-height:1.42!important}header h1{font-size:18px!important}.rules-note{font-size:13px!important;line-height:1.4!important;margin:5px 0 9px!important}.section-title{font-size:17px!important;margin:0 0 5px!important}.lead{font-size:13px!important;line-height:1.4!important;margin:0 0 8px!important}.info-box{font-size:13px!important;line-height:1.38!important;gap:3px!important;padding:9px!important;margin:7px 0 10px!important}.info-box strong{font-size:15px!important}.subhead{font-size:16px!important;margin:12px 0 6px!important}.field{font-size:14px!important;margin-bottom:9px!important}.step-dot{font-size:11px!important;min-height:40px!important}.steps{margin-bottom:9px!important}.class-pick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:6px 0 8px}.class-pick{min-height:42px;border:1px solid var(--line);background:#191611;color:var(--text);font:inherit;font-size:13px;padding:7px 5px;text-align:center}.class-pick.active{border-color:var(--accent);background:#3a3025;color:var(--accent)}.class-detail-box{font-size:13px!important;line-height:1.35!important}.class-more{width:100%;min-height:42px;border:1px solid var(--line);background:#30271e;color:var(--text);font:inherit;font-size:13px;margin:0 0 8px}.class-long-desc{border:1px solid #514535;background:#191611;padding:9px;font-size:13px;line-height:1.45;margin:0 0 9px}.radio-card,.check-card{font-size:14px!important;padding:8px!important;min-height:48px!important}.radio-card span,.check-card span{font-size:14px!important}.radio-card small,.check-card small{font-size:13px!important}.nav-actions button{font-size:14px!important;min-height:46px!important}`;document.head.appendChild(st);
+ title.textContent='1. クラスを選ぶ';field.style.display='none';
+ const grid=document.createElement('div');grid.className='class-pick-grid';field.after(grid);
+ const more=document.createElement('button');more.type='button';more.className='class-more';more.textContent='このクラスの説明を見る';info.after(more);
+ const long=document.createElement('div');long.className='class-long-desc';long.hidden=true;more.after(long);
+ const desc={Barbarian:'Rage（激怒）で攻撃に耐えながら、大きな武器で前線から戦います。HPが高く、近接戦闘の基本を覚えやすいクラスです。',Bard:'音楽や言葉とMagic（魔法）を使い、仲間を助けたり敵を妨害したりします。Charisma（魅力）が重要です。',Cleric:'Divine Magic（神聖魔法）を使い、回復・支援・戦闘を行います。Wisdom（判断力）が重要です。',Druid:'Nature Magic（自然魔法）を使い、自然や動物に関わる能力を持ちます。Wisdom（判断力）が重要です。',Fighter:'武器と防具の扱いに優れた戦士です。基本的な戦闘を覚えやすいクラスです。',Monk:'素早い動きと素手・軽い武器を使って戦います。Dexterity（敏捷力）とWisdom（判断力）が重要です。',Paladin:'武器・防具とDivine Magic（神聖魔法）を組み合わせて戦う騎士です。',Ranger:'武器、探索、Nature Magic（自然魔法）を使う野外活動の得意なクラスです。',Rogue:'Stealth（隠密）や器用さを生かし、隙を突く攻撃や技能で活躍します。Dexterity（敏捷力）が重要です。',Sorcerer:'生まれつき・内なる力からMagic（魔法）を使います。Charisma（魅力）が重要です。',Warlock:'強大な存在との契約によってMagic（魔法）を得たクラスです。Charisma（魅力）が重要です。',Wizard:'学習とSpellbook（呪文書）によって多くのMagic（魔法）を使い分けます。Intelligence（知力）が重要です。'};
+ function compact(){info.classList.add('class-detail-box');info.querySelectorAll('span').forEach(x=>{x.style.margin='0';x.style.lineHeight='1.35'});long.textContent=desc[sel.value]||'このクラスの特徴を確認してから選べます。'}
+ function buttons(){grid.innerHTML='';[...sel.options].forEach(o=>{const b=document.createElement('button');b.type='button';b.className='class-pick'+(o.value===sel.value?' active':'');b.textContent=o.textContent;b.onclick=()=>{sel.value=o.value;sel.dispatchEvent(new Event('change',{bubbles:true}));long.hidden=true;more.textContent='このクラスの説明を見る';setTimeout(()=>{buttons();compact()},0)};grid.appendChild(b)})}
+ more.onclick=()=>{long.hidden=!long.hidden;more.textContent=long.hidden?'このクラスの説明を見る':'説明を閉じる'};buttons();compact();
+ let equipmentPage=false;
+ function pick(){equipmentPage=false;title.textContent='1. クラスを選ぶ';lead.hidden=false;grid.hidden=false;info.hidden=false;more.hidden=false;long.hidden=true;equipTitle.hidden=true;equip.hidden=true;document.getElementById('prevBtn').hidden=true;window.scrollTo(0,0)}
+ function equipment(){equipmentPage=true;title.textContent='2. Starting Equipment（開始装備）';lead.hidden=true;grid.hidden=true;info.hidden=true;more.hidden=true;long.hidden=true;equipTitle.hidden=false;equipTitle.textContent='Starting Equipment（開始装備）';equip.hidden=false;document.getElementById('prevBtn').hidden=false;window.scrollTo(0,0)}
+ pick();const next=document.getElementById('nextBtn'),prev=document.getElementById('prevBtn');next.addEventListener('click',e=>{if(!panel.hidden&&!equipmentPage){e.preventDefault();e.stopImmediatePropagation();equipment()}},true);prev.addEventListener('click',e=>{if(!panel.hidden&&equipmentPage){e.preventDefault();e.stopImmediatePropagation();pick()}},true);
+},0);
