@@ -96,3 +96,11 @@ window.DDScenarioList = window.DDQuests;
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', resume, {once:true});
   else resume();
 })();
+
+(() => {
+  if ([...document.scripts].some(s => (s.getAttribute('src') || '').includes('dd-ui-patch.js'))) return;
+  const script = document.createElement('script');
+  script.src = 'js/dd-ui-patch.js?v=20260830-1';
+  script.async = true;
+  document.head.appendChild(script);
+})();
