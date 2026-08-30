@@ -29,13 +29,18 @@ button{font:inherit;touch-action:manipulation;-webkit-tap-highlight-color:transp
 .system-button .icon{font-size:17px;line-height:1}
 .system-button .label{margin-top:2px;font-size:8px}
 
-#mainArea{min-height:0;display:grid;grid-template-rows:minmax(180px,45%) minmax(100px,1fr);overflow:hidden}
-#sceneArea{position:relative;min-height:0;border-bottom:1px solid #9e8765;background:#cab591;overflow:hidden}
-#sceneImage{position:absolute;inset:0;background-position:center;background-size:cover;background-repeat:no-repeat}
-#scenePlaceholder{position:absolute;inset:0;display:grid;place-items:center;color:#66533d;font-size:15px}
-#messageArea{min-height:0;overflow-y:auto;background:#f1e3c9;padding:12px 14px 18px}
-#speakerName{margin-bottom:5px;font-size:15px;font-weight:800;color:#5e4630}
-#messageText{margin:0;font-size:15px;line-height:1.75;white-space:pre-wrap}
+#mainArea{min-height:0;display:grid;grid-template-columns:108px minmax(0,1fr);overflow:hidden;background:#f1e3c9}
+#sceneArea{position:relative;min-width:0;min-height:0;overflow-y:auto;background:#cab591;border-right:1px solid #9e8765;padding:12px 8px 18px}
+#sceneImage{display:none}
+#scenePlaceholder{display:none}
+#equipmentTitle{margin:0 0 10px;font-size:17px;line-height:1.3;color:#4f3b29;text-align:center}
+#equipmentList{display:grid;gap:8px}
+.equipment-side-item{padding:8px 6px;border:1px solid #9b815e;border-radius:6px;background:#ead5b2;color:#3b2b1e;text-align:center;font-size:13px;line-height:1.35;font-weight:750;overflow-wrap:anywhere}
+.equipment-side-item small{display:block;margin-top:3px;color:#725b42;font-size:11px;line-height:1.3;font-weight:650}
+.equipment-side-empty{margin:4px 0;color:#725b42;font-size:13px;line-height:1.55;text-align:center}
+#messageArea{min-width:0;min-height:0;overflow-y:auto;background:#f1e3c9;padding:16px 16px 24px}
+#speakerName{margin-bottom:8px;font-size:18px;font-weight:800;color:#5e4630}
+#messageText{margin:0;font-size:17px;line-height:1.85;white-space:pre-wrap}
 
 #actionArea{position:relative;z-index:15;min-height:68px;display:flex;justify-content:flex-end;align-items:center;gap:6px;padding:7px 50px calc(7px + env(safe-area-inset-bottom)) 7px;background:#30241b;border-top:1px solid #71593f}
 .action-button{min-width:60px;min-height:44px;border:1px solid #806849;border-radius:7px;background:#ead4ae;color:#352719;padding:6px 9px;font-size:14px;font-weight:800}
@@ -119,7 +124,8 @@ button{font:inherit;touch-action:manipulation;-webkit-tap-highlight-color:transp
   #currentLocation{font-size:15px}
   #statusLine{gap:8px;font-size:12px}
   .system-button{width:43px}
-  #messageText{font-size:15px}
+  #mainArea{grid-template-columns:104px minmax(0,1fr)}
+  #messageText{font-size:17px}
   .action-button{min-width:58px;font-size:14px}
   .skill-main{grid-template-columns:minmax(0,1fr) 38px 42px 22px;gap:4px}
   .skill-name{font-size:13px}
@@ -161,10 +167,10 @@ button{font:inherit;touch-action:manipulation;-webkit-tap-highlight-color:transp
   </header>
 
   <main id="mainArea">
-    <section id="sceneArea">
-      <div id="sceneImage"></div>
-      <div id="scenePlaceholder">MAP / SCENE</div>
-    </section>
+    <aside id="sceneArea" aria-label="現在の装備">
+      <h2 id="equipmentTitle">装備</h2>
+      <div id="equipmentList"><p class="equipment-side-empty">装備なし</p></div>
+    </aside>
     <section id="messageArea">
       <div id="speakerName">Brackenford</div>
       <p id="messageText">石造りの建物が並ぶ町だ。
@@ -227,6 +233,7 @@ saveButton.addEventListener('click',async()=>{
     const game=JSON.parse(raw);
     const saved=await DDSave.openSaveDialog(game);
     localStorage.setItem('ddActiveGame',JSON.stringify(saved));
+    renderEquipmentSidebar();
   }catch(error){
     if(error&&error.message==='セーブをキャンセルしました。')return;
     alert(error&&error.message?error.message:'セーブに失敗しました。');
@@ -276,7 +283,7 @@ const skillDefs=[
 ];
 
 function escHtml(value){
-  return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[ch]));
 }
 function fmtMod(value){return value>=0?`+${value}`:String(value);}
 function abilityMod(score){return Math.floor(((Number(score)||10)-10)/2);}
@@ -286,6 +293,25 @@ function proficiencyBonusFromLevel(level){
 }
 function activeGame(){
   try{return JSON.parse(localStorage.getItem('ddActiveGame')||'null');}catch(_){return null;}
+}
+function renderEquipmentSidebar(){
+  const root=document.getElementById('equipmentList');
+  if(!root)return;
+  const game=activeGame();
+  const inventory=Array.isArray(game?.inventory)?game.inventory:[];
+  const equipment=Array.isArray(game?.equipment)?game.equipment:[];
+  if(!equipment.length){
+    root.innerHTML='<p class="equipment-side-empty">装備なし</p>';
+    return;
+  }
+  root.innerHTML=equipment.map(entry=>{
+    const owned=inventory.find(item=>item.uid===entry.uid) || inventory.find(item=>item.itemId===entry.itemId);
+    const itemId=entry.itemId || owned?.itemId || '';
+    const data=window.DDInventory?.itemData(itemId);
+    const name=data?.ja || data?.name || itemId || '装備';
+    const en=data?.ja && data?.name ? data.name : '';
+    return `<div class="equipment-side-item">${escHtml(name)}${en?`<small>${escHtml(en)}</small>`:''}</div>`;
+  }).join('');
 }
 function renderSkillWindow(){
   const game=activeGame();
@@ -331,7 +357,12 @@ document.querySelectorAll('.menu-button').forEach(button=>{
   });
 });
 
-windowCloseButton.addEventListener('click',()=>{windowLayer.hidden=true;});
+windowCloseButton.addEventListener('click',()=>{
+  windowLayer.hidden=true;
+  renderEquipmentSidebar();
+});
+
+renderEquipmentSidebar();
 </script>
 </body>
 </html>
