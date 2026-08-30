@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>DD Battle</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{background:#17130f;color:#2f2418;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"Noto Sans JP",sans-serif}
+button{font:inherit;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+#battleScreen{width:100%;height:100dvh;min-height:560px;display:grid;grid-template-rows:58px minmax(0,1fr);background:#e9d8b8}
+#battleHeader{display:grid;grid-template-columns:54px minmax(0,1fr) 54px;align-items:center;background:#33271e;color:#f1dfc1;border-bottom:1px solid #6d563c;padding:5px}
+#backButton,#topButton{width:44px;height:44px;border:1px solid #776047;border-radius:7px;background:#49382a;color:#f2dfbe;font-size:16px;font-weight:800}
+#battleHeaderCenter{min-width:0;text-align:center}
+#battleTitle{margin:0;font-size:15px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#battleMeta{margin-top:2px;font-size:10px;color:#dfcbaa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#battleMain{min-height:0;overflow:auto;background:#f1e3c9;padding:10px 10px calc(14px + env(safe-area-inset-bottom))}
+#speakerName{margin:0 0 5px;font-size:15px;font-weight:850;color:#5e4630}
+#messageText{margin:0;font-size:13px;line-height:1.45;white-space:pre-wrap}
+#scenarioActions{margin-top:7px}
+#battleError{margin-top:10px;padding:10px;border:1px solid #a78761;background:#f6e5c9;font-size:12px;line-height:1.5}
+#battleError button{width:100%;min-height:44px;margin-top:8px;border:1px solid #806849;border-radius:7px;background:#ead4ae;color:#352719;font-size:13px;font-weight:850}
+@media(max-width:430px){#battleMain{padding:8px 8px calc(12px + env(safe-area-inset-bottom))}#battleTitle{font-size:14px}}
+</style>
+</head>
+<body>
+<div id="battleScreen">
+  <header id="battleHeader">
+    <button id="backButton" type="button" aria-label="シナリオへ戻る">←</button>
+    <div id="battleHeaderCenter">
+      <h1 id="battleTitle">Battle（戦闘）</h1>
+      <div id="battleMeta">戦闘データを読み込み中</div>
+    </div>
+    <button id="topButton" type="button" aria-label="TOPへ戻る">⌂</button>
+  </header>
+  <main id="battleMain">
+    <div id="storyArea">
+      <div id="speakerName">Battle（戦闘）</div>
+      <p id="messageText">戦闘を準備しています。</p>
+      <div id="scenarioActions"></div>
+    </div>
+    <div id="battleError" hidden></div>
+  </main>
+</div>
+
+<script src="data/dd-items.js?v=20260830-2"></script>
+<script src="js/dd-inventory.js?v=20260830-2"></script>
+<script src="js/dd-scenario-loader.js?v=20260830-3"></script>
+<script src="js/dd-scenario-runtime.js?v=20260830-3"></script>
+<script src="js/dd-battle.js?v=20260830-3"></script>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+
+function readGame(){
+  try{return JSON.parse(localStorage.getItem('ddActiveGame')||'null');}
+  catch(_){return null;}
+}
+
+function showError(message){
+  const box=$('battleError');
+  box.hidden=false;
+  box.innerHTML='';
+  const text=document.createElement('div');
+  text.textContent=message;
+  const button=document.createElement('button');
+  button.type='button';
+  button.textContent='シナリオ画面へ戻る';
+  button.onclick=()=>location.href='DD.html';
+  box.append(text,button);
+  $('speakerName').textContent='Battle Error（戦闘読み込みエラー）';
+  $('messageText').textContent='';
+}
+
+function loadScript(src){
+  return new Promise((resolve,reject)=>{
+    const existing=[...document.scripts].find(s=>s.getAttribute('src')===src||s.src.endsWith(src));
+    if(existing?.dataset.ddBattlePageLoaded==='1'){resolve();return;}
+    const script=existing||document.createElement('script');
+    script.src=src;
+    script.async=true;
+    script.addEventListener('load',()=>{script.dataset.ddBattlePageLoaded='1';resolve();},{once:true});
+    script.addEventListener('error',()=>reject(new Error('読み込み失敗: '+src)),{once:true});
+    if(!existing)document.head.appendChild(script);
+  });
+}
+
+async function bootBattle(){
+  const game=readGame();
+  const pending=game?.pendingCombat;
+  if(!game?.character){showError('キャラクターデータがありません。');return;}
+  if(!pending?.scenarioId||pending.sceneId==null){showError('開始待ちの戦闘データがありません。');return;}
+  const scenarioId=String(pending.scenarioId);
+  if(!/^[a-z0-9-]+$/i.test(scenarioId)){showError('シナリオIDを読み込めません。');return;}
+
+  $('battleMeta').textContent=`${game.character.name||'冒険者'} / Lv.${game.character.level||1} / HP ${game.character.hp ?? game.character.maxHp ?? '-'}`;
+
+  try{
+    window.DDScenarioList=[{id:scenarioId,entry:`scenarios/${scenarioId}/scenario.js`}];
+    window.DDQuests=window.DDScenarioList;
+
+    const scenario=await window.DDScenarioLoader.loadScenario(scenarioId);
+    const scenes=await window.DDScenarioLoader.loadModule(scenarioId,'scenes')||[];
+    const monsters=await window.DDScenarioLoader.loadModule(scenarioId,'monsters')||[];
+    const maps=await window.DDScenarioLoader.loadModule(scenarioId,'maps')||[];
+    const scene=scenes.find(v=>String(v.id)===String(pending.sceneId));
+    if(!scene?.combat)throw new Error('この場面に戦闘データがありません。');
+
+    const selected=(scene.combat.monsterIds||[]).map(id=>monsters.find(v=>v.id===id)).filter(Boolean);
+    if(!selected.length)throw new Error('戦闘する敵データが見つかりません。');
+    const map=maps.find(v=>v.id===scene.mapId)||null;
+
+    $('battleTitle').textContent=`Battle（戦闘） / ${selected.map(v=>v.ja||v.name).join(' / ')}`;
+
+    const runtime=window.DDScenarioRuntime;
+    if(runtime?.gotoScene){
+      const originalGoto=runtime.gotoScene.bind(runtime);
+      runtime.gotoScene=async sceneId=>{
+        await originalGoto(sceneId);
+        location.href='DD.html';
+      };
+    }
+
+    await window.DDBattle.start({scenarioId,scene,monsters:selected,map});
+  }catch(error){
+    console.error(error);
+    showError(error?.message||'戦闘を読み込めませんでした。');
+  }
+}
+
+$('backButton').addEventListener('click',()=>location.href='DD.html');
+$('topButton').addEventListener('click',()=>location.href='DD_top.html');
+
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootBattle,{once:true});
+else bootBattle();
+</script>
+</body>
+</html>
