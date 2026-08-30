@@ -3,6 +3,9 @@ window.DDQuests = [
     id: 'frozen-offerings',
     title: 'Frozen Offerings',
     titleJa: 'Frozen Offerings',
+    minLevel: 7,
+    maxLevel: 10,
+    recommendedLevel: 8,
     entry: 'scenarios/frozen-offerings/scenario.js'
   }
 ];
@@ -98,15 +101,15 @@ window.DDScenarioList = window.DDQuests;
 })();
 
 (() => {
-  if (![...document.scripts].some(s => (s.getAttribute('src') || '').includes('dd-ui-patch.js'))) {
+  const scripts = [
+    ['dd-ui-patch.js','js/dd-ui-patch.js?v=20260830-1'],
+    ['dd-death-retry.js','js/dd-death-retry.js?v=20260830-1'],
+    ['dd-quest-level.js','js/dd-quest-level.js?v=20260830-1']
+  ];
+  for (const [name,src] of scripts) {
+    if ([...document.scripts].some(s => (s.getAttribute('src') || '').includes(name))) continue;
     const script = document.createElement('script');
-    script.src = 'js/dd-ui-patch.js?v=20260830-1';
-    script.async = true;
-    document.head.appendChild(script);
-  }
-  if (![...document.scripts].some(s => (s.getAttribute('src') || '').includes('dd-death-retry.js'))) {
-    const script = document.createElement('script');
-    script.src = 'js/dd-death-retry.js?v=20260830-1';
+    script.src = src;
     script.async = true;
     document.head.appendChild(script);
   }
