@@ -12,7 +12,7 @@ window.DDScenarios['frozen-offerings'] = {
     scenes: 'scenarios/frozen-offerings/scenes.js',
     maps: 'scenarios/frozen-offerings/maps.js',
     npcs: 'scenarios/frozen-offerings/npcs.js',
-    items: 'scenarios/frozen-offerings/items.js',
+    items: 'scenarios/frozen-offerings/items-runtime.js',
     monsters: 'scenarios/frozen-offerings/monsters.js',
     rewards: 'scenarios/frozen-offerings/rewards.js'
   },
