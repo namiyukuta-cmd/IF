@@ -46,7 +46,7 @@ window.DD_ORIGIN_OPTIONS = (() => {
   if (typeof document === 'undefined') return;
   if ([...document.scripts].some(s => (s.getAttribute('src') || '').includes('dd-class-guide.js'))) return;
   const script = document.createElement('script');
-  script.src = 'js/dd-class-guide.js?v=20260830-1';
+  script.src = 'js/dd-class-guide.js?v=20260830-2';
   script.async = true;
   document.head.appendChild(script);
 })();
