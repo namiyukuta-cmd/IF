@@ -42,7 +42,11 @@ window.DDScenarioList = window.DDQuests;
           startSceneId: scenario.startSceneId
         };
         if (!game.scenarioStates) game.scenarioStates = {};
-        if (!game.scenarioStates[id]) game.scenarioStates[id] = structuredClone ? structuredClone(scenario.states || {}) : JSON.parse(JSON.stringify(scenario.states || {}));
+        if (!game.scenarioStates[id]) {
+          game.scenarioStates[id] = typeof structuredClone === 'function'
+            ? structuredClone(scenario.states || {})
+            : JSON.parse(JSON.stringify(scenario.states || {}));
+        }
         localStorage.setItem('ddActiveGame', JSON.stringify(game));
       }
     } catch (_) {}
