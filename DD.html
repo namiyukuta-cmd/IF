@@ -10,7 +10,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden}
 body{background:#17130f;color:#2f2418;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"Noto Sans JP",sans-serif}
 button{font:inherit;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 [hidden]{display:none!important}
-#gameScreen{position:relative;width:100%;height:100dvh;min-height:560px;overflow:hidden;display:grid;grid-template-rows:92px minmax(0,1fr) 66px;background:#e9d8b8}
+#gameScreen{position:relative;width:100%;height:100dvh;min-height:560px;overflow:hidden;display:grid;grid-template-rows:92px minmax(0,1fr) 54px;background:#e9d8b8}
 #topBar{display:grid;grid-template-columns:54px minmax(0,1fr) 110px;background:#33271e;color:#f1dfc1;border-bottom:1px solid #6d563c;z-index:20}
 #topLeft{display:flex;justify-content:center;padding-top:7px}
 #topCenter{min-width:0;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:3px 4px}
@@ -35,17 +35,19 @@ button{font:inherit;touch-action:manipulation;-webkit-tap-highlight-color:transp
 #storyArea{min-width:0;min-height:0;overflow-y:auto;background:#f1e3c9;padding:17px 16px 26px}
 #speakerName{margin-bottom:9px;font-size:20px;font-weight:850;color:#5e4630}
 #messageText{margin:0;font-size:17px;line-height:1.9;white-space:pre-wrap}
-#quickBar{z-index:20;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding:7px 9px calc(7px + env(safe-area-inset-bottom));background:#30241b;border-top:1px solid #71593f}
-.quick-button{min-height:50px;border:1px solid #806849;border-radius:8px;background:#ead4ae;color:#352719;padding:7px 5px;font-size:16px;font-weight:850}
-#windowLayer{position:absolute;z-index:100;inset:92px 8px calc(72px + env(safe-area-inset-bottom)) 8px;pointer-events:none}
-#gameWindow{width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden;border:2px solid #6e563d;border-radius:10px;background:#f0e1c5;box-shadow:0 8px 25px rgba(0,0,0,.38);pointer-events:auto}
-#windowHeader{min-height:52px;display:flex;align-items:center;justify-content:space-between;padding:5px 7px 5px 12px;background:#d6bd94;border-bottom:1px solid #866e4f}
-#windowTitle{font-size:19px;font-weight:850}#windowCloseButton{width:42px;height:42px;border:1px solid #7c6245;border-radius:50%;background:#f2dec0;color:#3a2a1d;font-size:23px;font-weight:750}
-#windowContent{flex:1;min-height:0;overflow:auto;padding:12px 13px 18px;font-size:16px;line-height:1.7}
-.inventory-money{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}.inventory-money span{min-height:48px;display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid #a98d67;background:#dfc8a5;font-size:16px}
-.inventory-weight{text-align:right;font-size:16px}.inventory-title{font-size:19px}.inventory-row{width:100%;min-height:60px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;margin-bottom:7px;padding:9px 11px;border:1px solid #a98d67;border-radius:7px;background:#f8ead0;color:#342719;text-align:left}.inventory-name{display:flex;flex-direction:column}.inventory-name strong,.inventory-name small,.inventory-quantity{font-size:16px}.inventory-name small,.inventory-row-meta{color:#715a40}.inventory-row-side{display:flex;flex-direction:column;align-items:flex-end}.inventory-row.equipped{background:#dfc8a5}.inventory-empty{font-size:16px}.item-back,.item-actions button{min-height:48px;border:1px solid #806849;border-radius:7px;background:#ead4ae;color:#352719;font-size:16px;font-weight:800;padding:8px 12px}.item-detail,.item-ja,.item-owned-count,.item-text-section p,.item-stat{font-size:16px}.item-detail h2{font-size:21px}.item-text-section{margin:12px 0;padding:11px;border:1px solid #b89c74;background:#f8ead0}.item-text-section h3,.item-list-section h3{font-size:17px}.item-stat{min-height:48px;display:flex;justify-content:space-between;border-bottom:1px solid #c4aa84;align-items:center}.item-actions{display:grid;gap:8px;margin-top:16px}
-.skill-summary,.spell-intro{margin:0 0 10px;padding:9px 10px;border:1px solid #a48a64;border-radius:6px;background:#e1c9a2;font-size:16px;font-weight:750}.skill-list,.spell-grid{display:grid;gap:7px}.skill-row,.spell-card{padding:9px 10px;border:1px solid #ad936d;border-radius:7px;background:#f8ead0}.skill-row.proficient{background:#ead7b7;border-color:#76583c}.skill-main{display:grid;grid-template-columns:minmax(0,1fr) 44px 48px;gap:6px;align-items:center}.skill-name{font-size:16px;font-weight:850}.skill-name small{display:block;font-size:14px;color:#765f45}.skill-ability,.skill-mod{min-height:34px;display:grid;place-items:center;border:1px solid #a98d67;background:#dfc8a5;font-size:14px;font-weight:850}.skill-mod{font-size:16px;background:#ead6b5}.skill-prof-label,.spell-source{display:block;margin-top:4px;color:#715a40;font-size:14px}.spell-section{margin-top:15px}.spell-section h3{margin:0 0 7px;font-size:18px}.spell-card{font-size:16px;font-weight:750}.spell-empty{padding:15px;border:1px dashed #a48a64;font-size:16px;text-align:center;color:#715a40}
-@media(max-width:430px){#topBar{grid-template-columns:50px minmax(0,1fr) 104px}#topRight{grid-template-columns:43px 43px}.system-button{width:43px}#metaLine{font-size:11px;gap:5px}#statusLine{font-size:11px;gap:7px}#handLine{font-size:9px;gap:7px}#mainArea{grid-template-columns:80px minmax(0,1fr)}#storyArea{padding:15px 13px 24px}}
+#quickBar{z-index:20;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px;padding:5px 5px calc(5px + env(safe-area-inset-bottom));background:#30241b;border-top:1px solid #71593f}
+.quick-button{min-width:0;min-height:42px;border:1px solid #806849;border-radius:6px;background:#ead4ae;color:#352719;padding:4px 1px;font-size:12px;line-height:1.1;font-weight:850;white-space:nowrap}
+#windowLayer{position:absolute;z-index:100;inset:92px 7px calc(60px + env(safe-area-inset-bottom)) 7px;pointer-events:none}
+#gameWindow{width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden;border:2px solid #6e563d;border-radius:9px;background:#f0e1c5;box-shadow:0 8px 25px rgba(0,0,0,.38);pointer-events:auto}
+#windowHeader{min-height:44px;display:flex;align-items:center;justify-content:space-between;padding:4px 6px 4px 10px;background:#d6bd94;border-bottom:1px solid #866e4f}
+#windowTitle{font-size:16px;font-weight:850}#windowCloseButton{width:36px;height:36px;border:1px solid #7c6245;border-radius:50%;background:#f2dec0;color:#3a2a1d;font-size:20px;font-weight:750}
+#windowContent{flex:1;min-height:0;overflow:auto;padding:7px 8px 11px;font-size:13px;line-height:1.45}
+.inventory-screen{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 5px;align-items:start}
+.inventory-money{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:0}.inventory-money span{min-height:30px;display:flex;align-items:center;justify-content:center;gap:4px;border:1px solid #a98d67;background:#dfc8a5;font-size:11px}
+.inventory-weight{grid-column:1/-1;text-align:right;font-size:11px;line-height:1.2;margin:0 1px 2px}.inventory-title{grid-column:1/-1;margin:5px 0 0;font-size:14px;line-height:1.2}.inventory-row{width:100%;min-width:0;min-height:42px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:4px;margin:0;padding:5px 6px;border:1px solid #a98d67;border-radius:6px;background:#f8ead0;color:#342719;text-align:left}.inventory-name{min-width:0;display:flex;flex-direction:column;line-height:1.15}.inventory-name strong{font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.inventory-name small{font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.inventory-quantity{font-size:11px}.inventory-name small,.inventory-row-meta{color:#715a40}.inventory-row-meta{font-size:9px}.inventory-row-side{display:flex;flex-direction:column;align-items:flex-end;line-height:1.1}.inventory-row.equipped{background:#dfc8a5}.inventory-empty{grid-column:1/-1;margin:2px 0;font-size:12px}.item-back,.item-actions button{min-height:38px;border:1px solid #806849;border-radius:6px;background:#ead4ae;color:#352719;font-size:13px;font-weight:800;padding:6px 9px}.item-detail,.item-ja,.item-owned-count,.item-text-section p,.item-stat{font-size:13px}.item-detail h2{font-size:17px;margin:8px 0 2px}.item-ja,.item-owned-count{margin:2px 0}.item-text-section{margin:8px 0;padding:8px;border:1px solid #b89c74;background:#f8ead0}.item-text-section h3,.item-list-section h3{font-size:14px;margin:0 0 4px}.item-stat{min-height:34px;display:flex;justify-content:space-between;border-bottom:1px solid #c4aa84;align-items:center}.item-actions{display:grid;gap:6px;margin-top:10px}
+.skill-summary,.spell-intro{margin:0 0 5px;padding:5px 7px;border:1px solid #a48a64;border-radius:5px;background:#e1c9a2;font-size:11px;font-weight:750}.skill-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.skill-row{min-width:0;padding:4px 5px;border:1px solid #ad936d;border-radius:5px;background:#f8ead0}.skill-row.proficient{background:#ead7b7;border-color:#76583c}.skill-main{display:grid;grid-template-columns:minmax(0,1fr) 25px 29px;gap:3px;align-items:center}.skill-name{min-width:0;font-size:11px;line-height:1.05;font-weight:850;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.skill-name small{display:block;margin-top:2px;font-size:9px;color:#765f45;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.skill-ability,.skill-mod{min-height:25px;display:grid;place-items:center;border:1px solid #a98d67;background:#dfc8a5;font-size:9px;font-weight:850}.skill-mod{font-size:11px;background:#ead6b5}.skill-prof-label{display:block;margin-top:2px;color:#715a40;font-size:9px;line-height:1.05}.spell-section{margin-top:8px}.spell-section h3{margin:0 0 4px;font-size:13px}.spell-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.spell-card{min-width:0;padding:5px 6px;border:1px solid #ad936d;border-radius:5px;background:#f8ead0;font-size:11px;line-height:1.15;font-weight:750;overflow-wrap:anywhere}.spell-source{display:block;margin-top:2px;color:#715a40;font-size:9px;line-height:1.1}.spell-empty{padding:10px;border:1px dashed #a48a64;font-size:12px;text-align:center;color:#715a40}
+.quest-list,.map-list{display:grid;gap:5px}.quest-row{width:100%;min-height:44px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:7px;padding:6px 8px;border:1px solid #9d805c;border-radius:6px;background:#f8ead0;color:#342719;text-align:left}.quest-row:disabled{opacity:.58;background:#d8c6a8;color:#655643}.quest-title{min-width:0;font-size:13px;font-weight:850}.quest-title small{display:block;margin-top:2px;font-size:9px;font-weight:600;color:#765f45}.quest-status{min-width:37px;padding:3px 5px;border:1px solid #9d805c;border-radius:10px;background:#dfc8a5;font-size:10px;font-weight:850;text-align:center}.quest-note{margin:0 0 6px;font-size:11px;color:#715a40}.map-current{margin-bottom:6px;padding:6px 8px;border:1px solid #9d805c;background:#e1c9a2;border-radius:6px;font-size:12px;font-weight:800}.map-list{grid-template-columns:repeat(2,minmax(0,1fr))}.map-card{min-height:38px;padding:5px 6px;border:1px solid #ad936d;border-radius:5px;background:#f8ead0;font-size:11px;line-height:1.15}.map-empty{padding:10px;border:1px dashed #a48a64;font-size:12px;text-align:center;color:#715a40}
+@media(max-width:430px){#topBar{grid-template-columns:50px minmax(0,1fr) 104px}#topRight{grid-template-columns:43px 43px}.system-button{width:43px}#metaLine{font-size:11px;gap:5px}#statusLine{font-size:11px;gap:7px}#handLine{font-size:9px;gap:7px}#mainArea{grid-template-columns:80px minmax(0,1fr)}#storyArea{padding:15px 13px 24px}.quick-button{font-size:11px}}
 </style>
 </head>
 <body>
@@ -64,12 +66,19 @@ button{font:inherit;touch-action:manipulation;-webkit-tap-highlight-color:transp
   <section id="storyArea"><div id="speakerName">Brackenford</div><p id="messageText">石造りの建物が並ぶ町だ。
 通りには旅人と商人の姿が見える。</p></section>
 </main>
-<nav id="quickBar"><button id="itemButton" class="quick-button" type="button">所持品</button><button id="skillButton" class="quick-button" type="button">スキル</button><button id="spellButton" class="quick-button" type="button">呪文</button></nav>
+<nav id="quickBar">
+  <button id="questButton" class="quick-button" type="button">クエスト</button>
+  <button id="itemButton" class="quick-button" type="button">所持品</button>
+  <button id="skillButton" class="quick-button" type="button">スキル</button>
+  <button id="spellButton" class="quick-button" type="button">呪文</button>
+  <button id="mapButton" class="quick-button" type="button">マップ</button>
+</nav>
 <div id="windowLayer" hidden><section id="gameWindow"><header id="windowHeader"><div id="windowTitle">所持品</div><button id="windowCloseButton" type="button">×</button></header><div id="windowContent"></div></section></div>
 </div>
 <script src="data/dd-srd-character.js?v=20260830-2"></script>
 <script src="data/dd-class-options.js?v=20260830-2"></script>
 <script src="data/dd-items.js?v=20260830-2"></script>
+<script src="data/dd-quests.js?v=20260830-1"></script>
 <script src="js/dd-inventory.js?v=20260830-2"></script>
 <script src="js/dd-inventory-ui.js?v=20260830-2"></script>
 <script src="js/dd-github.js?v=20260830-2"></script>
@@ -80,6 +89,7 @@ const $=id=>document.getElementById(id);
 const windowLayer=$('windowLayer'),windowTitle=$('windowTitle'),windowContent=$('windowContent');
 function escHtml(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
 function activeGame(){try{return JSON.parse(localStorage.getItem('ddActiveGame')||'null');}catch(_){return null;}}
+function persistGame(game){localStorage.setItem('ddActiveGame',JSON.stringify(game));}
 function fmtMod(value){return value>=0?`+${value}`:String(value);}
 function abilityMod(score){return Math.floor(((Number(score)||10)-10)/2);}
 function proficiencyBonusFromLevel(level){const lv=Math.max(1,Math.min(20,Math.floor(Number(level)||1)));return Math.min(6,2+Math.floor((lv-1)/4));}
@@ -111,10 +121,31 @@ function renderEquipment(){
 }
 function openWindow(title,html=''){windowTitle.textContent=title;windowContent.innerHTML=html;windowLayer.hidden=false;}
 function closeWindow(){windowLayer.hidden=true;renderEquipment();renderHeader();}
+function questStatus(game,id){
+  if(Array.isArray(game?.completedQuests)&&game.completedQuests.includes(id))return 'completed';
+  const state=game?.questStates?.[id];
+  if(state==='completed'||state?.status==='completed')return 'completed';
+  if((game?.activeQuestId||game?.quest?.id)===id)return 'active';
+  return 'available';
+}
+function renderQuests(){
+  const game=activeGame()||{},quests=Array.isArray(window.DDQuests)?window.DDQuests:[];
+  if(!quests.length)return '<div class="map-empty">選べるクエストはまだありません。</div>';
+  const rows=quests.map(q=>{const status=questStatus(game,q.id),done=status==='completed',label=done?'済':status==='active'?'進行中':'開始';return `<button class="quest-row" data-quest-id="${escHtml(q.id)}" type="button" ${done?'disabled':''}><span class="quest-title">${escHtml(q.titleJa||q.title)}<small>${escHtml(q.title||'')}</small></span><span class="quest-status">${label}</span></button>`;}).join('');
+  return `<p class="quest-note">クエストを選択します。完了済みは再選択できません。</p><div class="quest-list">${rows}</div>`;
+}
+function bindQuestRows(){
+  windowContent.querySelectorAll('.quest-row[data-quest-id]:not(:disabled)').forEach(button=>button.addEventListener('click',()=>{
+    const id=button.dataset.questId,q=(window.DDQuests||[]).find(v=>v.id===id);if(!q)return;
+    const game=window.DDInventory?.getGame?.()||activeGame()||{};if(questStatus(game,id)==='completed')return;
+    game.activeQuestId=id;game.quest={...(game.quest||{}),id,title:q.titleJa||q.title,status:'active'};game.questStates={...(game.questStates||{}),[id]:{...(game.questStates?.[id]||{}),status:'active'}};persistGame(game);
+    openWindow('クエスト',renderQuests());bindQuestRows();
+  }));
+}
 const skillDefs=[['Acrobatics','軽業','dex'],['Animal Handling','動物使い','wis'],['Arcana','魔法学','int'],['Athletics','運動','str'],['Deception','ペテン','cha'],['History','歴史','int'],['Insight','看破','wis'],['Intimidation','威圧','cha'],['Investigation','捜査','int'],['Medicine','医術','wis'],['Nature','自然','int'],['Perception','知覚','wis'],['Performance','芸能','cha'],['Persuasion','説得','cha'],['Religion','宗教','int'],['Sleight of Hand','手先の早業','dex'],['Stealth','隠密','dex'],['Survival','生存','wis']];
 function renderSkills(){
   const game=activeGame(),c=game?.character||{},level=Math.max(1,Math.floor(Number(c.level)||1)),pb=proficiencyBonusFromLevel(level),proficient=new Set((c.skills||[]).map(v=>String(v).toLowerCase())),expertise=new Set((Array.isArray(c.classChoices?.expertise)?c.classChoices.expertise:[]).map(v=>String(v).toLowerCase()));
-  const rows=skillDefs.map(([name,ja,ability])=>{const key=name.toLowerCase(),expert=expertise.has(key),prof=expert||proficient.has(key),total=abilityMod(c.abilities?.[ability])+(expert?pb*2:prof?pb:0);return `<div class="skill-row ${prof?'proficient':''}"><div class="skill-main"><div class="skill-name">${escHtml(name)}<small>${escHtml(ja)}</small></div><div class="skill-ability">${ability.toUpperCase()}</div><div class="skill-mod">${fmtMod(total)}</div></div><div class="skill-prof-label">${expert?'Expertise':prof?'● 習熟':'未習熟'}</div></div>`;}).join('');
+  const rows=skillDefs.map(([name,ja,ability])=>{const key=name.toLowerCase(),expert=expertise.has(key),prof=expert||proficient.has(key),total=abilityMod(c.abilities?.[ability])+(expert?pb*2:prof?pb:0);return `<div class="skill-row ${prof?'proficient':''}"><div class="skill-main"><div class="skill-name">${escHtml(ja)}<small>${escHtml(name)}</small></div><div class="skill-ability">${ability.toUpperCase()}</div><div class="skill-mod">${fmtMod(total)}</div></div><div class="skill-prof-label">${expert?'Expertise':prof?'● 習熟':'未習熟'}</div></div>`;}).join('');
   return `<div class="skill-summary">Lv.${level}　習熟ボーナス ${fmtMod(pb)}</div><div class="skill-list">${rows}</div>`;
 }
 function list(value){return Array.isArray(value)?value.filter(Boolean):value?[value]:[];}
@@ -129,10 +160,19 @@ function renderSpells(){
   if(Array.isArray(c.spells))sections.push(spellSection('その他の呪文',c.spells,'キャラクター'));
   const html=sections.filter(Boolean).join('');return `<p class="spell-intro">${escHtml(c.classNameJa||c.className||'キャラクター')}の現在の呪文です。</p>${html||'<div class="spell-empty">現在使用できる呪文はありません。</div>'}`;
 }
+function renderMap(){
+  const game=activeGame()||{},current=game?.location?.label||game?.current?.location||'未設定';
+  const source=Array.isArray(game.discoveredMaps)?game.discoveredMaps:Array.isArray(game.maps)?game.maps:[];
+  const maps=source.map(v=>typeof v==='string'?{name:v}:v).filter(Boolean);
+  const rows=maps.length?`<div class="map-list">${maps.map(v=>`<div class="map-card">${escHtml(v.label||v.name||v.title||v.id||'マップ')}</div>`).join('')}</div>`:'<div class="map-empty">発見済みのマップはまだありません。</div>';
+  return `<div class="map-current">現在地：${escHtml(current)}</div>${rows}`;
+}
 function renderLog(){const log=activeGame()?.log||[];return Array.isArray(log)&&log.length?log.map(v=>`<p>${escHtml(typeof v==='string'?v:JSON.stringify(v))}</p>`).join(''):'<p>ログはまだありません。</p>';}
+$('questButton').addEventListener('click',()=>{openWindow('クエスト',renderQuests());bindQuestRows();});
 $('itemButton').addEventListener('click',()=>{openWindow('所持品');if(window.DDInventoryUI)DDInventoryUI.render(windowContent);else windowContent.innerHTML='<p>所持品を読み込めませんでした。</p>';});
 $('skillButton').addEventListener('click',()=>openWindow('スキル',renderSkills()));
 $('spellButton').addEventListener('click',()=>openWindow('呪文',renderSpells()));
+$('mapButton').addEventListener('click',()=>openWindow('マップ',renderMap()));
 $('logButton').addEventListener('click',()=>openWindow('LOG',renderLog()));
 $('windowCloseButton').addEventListener('click',closeWindow);
 $('topButton').addEventListener('click',()=>location.href='DD_top.html');
