@@ -119,7 +119,7 @@
       const map=maps.find(v=>v.id===scene.mapId)||null;
       root.dataset.combatReady=String(pending.sceneId);
       root.innerHTML=`<div class="scenario-result">戦闘：${escapeHtml(selected.map(v=>`${v.ja||v.name} ×${v.count||1}`).join(' / '))}</div><button id="startScenarioBattle" class="scenario-action" type="button">戦闘開始</button>`;
-      $('startScenarioBattle')?.addEventListener('click',async()=>{const engine=await ensureBattle();await engine.start({scenarioId:id,scene,monsters:selected,map});});
+      $('startScenarioBattle')?.addEventListener('click',()=>{location.href='DD_battle.html?v=20260830-2023';});
     }catch(error){console.error(error);}
   }
 
