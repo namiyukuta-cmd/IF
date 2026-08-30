@@ -9,6 +9,7 @@ window.DDScenarios['frozen-offerings'] = {
   dataSheet: 'Frozen Offerings_シナリオ整理',
   startSceneId: 'intro',
   modules: {
+    scenes: 'scenarios/frozen-offerings/scenes.js',
     maps: 'scenarios/frozen-offerings/maps.js',
     npcs: 'scenarios/frozen-offerings/npcs.js',
     items: 'scenarios/frozen-offerings/items.js',
@@ -43,7 +44,7 @@ window.DDScenarios['frozen-offerings'] = {
     knowsWhitetooth: false,
     longRestTaken: false,
     shortRestTaken: false,
-    questLost: false
-  },
-  scenes: []
+    questLost: false,
+    thalgarDead: false
+  }
 };
