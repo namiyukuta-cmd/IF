@@ -41,13 +41,13 @@ window.DDScenarioList = window.DDQuests;
 
   function ensureLoader() {
     if (window.DDScenarioLoader) return Promise.resolve(window.DDScenarioLoader);
-    if (!loaderPromise) loaderPromise = loadScript('js/dd-scenario-loader.js?v=20260830-2','シナリオ読み込み機能を読み込めませんでした。').then(()=>window.DDScenarioLoader);
+    if (!loaderPromise) loaderPromise = loadScript('js/dd-scenario-loader.js?v=20260830-3','シナリオ読み込み機能を読み込めませんでした。').then(()=>window.DDScenarioLoader);
     return loaderPromise;
   }
 
   function ensureRuntime() {
     if (window.DDScenarioRuntime) return Promise.resolve(window.DDScenarioRuntime);
-    if (!runtimePromise) runtimePromise = loadScript('js/dd-scenario-runtime.js?v=20260830-1','シナリオ進行機能を読み込めませんでした。').then(()=>window.DDScenarioRuntime);
+    if (!runtimePromise) runtimePromise = loadScript('js/dd-scenario-runtime.js?v=20260830-3','シナリオ進行機能を読み込めませんでした。').then(()=>window.DDScenarioRuntime);
     return runtimePromise;
   }
 
@@ -111,10 +111,10 @@ window.DDScenarioList = window.DDQuests;
 
 (() => {
   const scripts = [
-    ['dd-ui-patch.js','js/dd-ui-patch.js?v=20260830-1'],
-    ['dd-equipment-ui.js','js/dd-equipment-ui.js?v=20260830-1'],
-    ['dd-death-retry.js','js/dd-death-retry.js?v=20260830-1'],
-    ['dd-quest-level.js','js/dd-quest-level.js?v=20260830-1']
+    ['dd-ui-patch.js','js/dd-ui-patch.js?v=20260830-3'],
+    ['dd-equipment-ui.js','js/dd-equipment-ui.js?v=20260830-2'],
+    ['dd-death-retry.js','js/dd-death-retry.js?v=20260830-2'],
+    ['dd-quest-level.js','js/dd-quest-level.js?v=20260830-2']
   ];
   for (const [name,src] of scripts) {
     if ([...document.scripts].some(s => (s.getAttribute('src') || '').includes(name))) continue;
