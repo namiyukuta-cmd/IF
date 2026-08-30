@@ -3,7 +3,7 @@
 
   const CONFIG = Object.freeze({
     owner: 'namiyukuta-cmd',
-    repo: 'english-game',
+    repo: 'IF',
     branch: 'main',
     saveDir: 'dd-saves',
     tokenKey: 'ddGithubToken'
