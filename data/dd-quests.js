@@ -112,6 +112,7 @@ window.DDScenarioList = window.DDQuests;
 (() => {
   const scripts = [
     ['dd-ui-patch.js','js/dd-ui-patch.js?v=20260830-1'],
+    ['dd-equipment-ui.js','js/dd-equipment-ui.js?v=20260830-1'],
     ['dd-death-retry.js','js/dd-death-retry.js?v=20260830-1'],
     ['dd-quest-level.js','js/dd-quest-level.js?v=20260830-1']
   ];
