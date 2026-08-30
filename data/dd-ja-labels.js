@@ -7,3 +7,27 @@ species:{Dragonborn:'ドラゴンボーン',Dwarf:'ドワーフ',Elf:'エルフ'
 terms:{'Cantrip':'キャントリップ（初級呪文）','Skill Proficiency':'技能習熟','Origin Feat':'オリジン特技','Background':'背景・出自','Species':'種族','Language':'言語','Common':'共通語'},
 label(value,group){const m=this[group]||{};return m[value]?`${value}（${m[value]}）`:value;}
 };
+
+(()=>{
+  if(document.getElementById('dd-new-mobile-font-fix')) return;
+  const style=document.createElement('style');
+  style.id='dd-new-mobile-font-fix';
+  style.textContent=`
+    body{font-size:15px!important;line-height:1.5!important}
+    .rules-note,.lead,.mini-note,.status,.field,.info-box{font-size:15px!important;line-height:1.5!important}
+    .info-box strong,.class-choice-head strong{font-size:16px!important}
+    .section-title{font-size:19px!important}
+    .subhead{font-size:17px!important}
+    .check-card span,.radio-card span,input,select,textarea,.nav-actions button,.small-btn{font-size:15px!important}
+    .check-card small,.radio-card small,.class-choice-count{font-size:14px!important}
+    .step-dot{font-size:12px!important;min-height:42px!important}
+    header h1{font-size:20px!important}
+    .back{font-size:19px!important;width:42px!important;height:42px!important}
+    .check-card,.radio-card{min-height:50px!important;padding:9px!important}
+    form{padding:12px!important}
+    .info-box{padding:10px!important;margin:8px 0 13px!important}
+    .nav-actions{padding-top:8px!important;padding-bottom:calc(8px + env(safe-area-inset-bottom))!important}
+    .nav-actions button{min-height:48px!important}
+  `;
+  document.head.appendChild(style);
+})();
