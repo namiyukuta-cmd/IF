@@ -10,365 +10,117 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden}
 body{background:#17130f;color:#2f2418;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"Noto Sans JP",sans-serif}
 button{font:inherit;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 [hidden]{display:none!important}
-
 #gameScreen{position:relative;width:100%;height:100dvh;min-height:560px;overflow:hidden;display:grid;grid-template-rows:92px minmax(0,1fr) 66px;background:#e9d8b8}
-
-#topBar{position:relative;z-index:20;display:grid;grid-template-columns:54px minmax(0,1fr) 110px;min-height:92px;background:#33271e;color:#f1dfc1;border-bottom:1px solid #6d563c}
-#topLeft{display:flex;align-items:flex-start;justify-content:center;padding:7px 2px}
-#topCenter{min-width:0;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:5px 4px}
+#topBar{display:grid;grid-template-columns:54px minmax(0,1fr) 110px;background:#33271e;color:#f1dfc1;border-bottom:1px solid #6d563c;z-index:20}
+#topLeft{display:flex;justify-content:center;padding-top:7px}
+#topCenter{min-width:0;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:4px}
 #dateTime{font-size:17px;font-weight:750}
 #currentLocation{margin-top:3px;font-size:18px;font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#statusLine{margin-top:5px;display:flex;justify-content:center;gap:10px;font-size:17px}
-#topRight{display:grid;grid-template-columns:46px 46px;grid-template-rows:38px 38px;justify-content:end;align-content:start;gap:4px 5px;padding:6px 5px}
-#loadButton{grid-column:1;grid-row:1}
-#saveButton{grid-column:2;grid-row:1}
-#logButton{grid-column:2;grid-row:2}
-.system-button{width:46px;height:38px;border:1px solid #776047;border-radius:7px;background:#49382a;color:#f2dfbe;padding:2px;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:12px;font-weight:800}
-.system-button .icon{font-size:17px;line-height:1}
-.system-button .label{margin-top:2px;font-size:10px}
-
-#mainArea{min-height:0;display:grid;grid-template-columns:108px minmax(0,1fr);overflow:hidden;background:#f1e3c9}
-#equipmentArea{min-width:0;min-height:0;overflow-y:auto;background:#cab591;border-right:1px solid #9e8765;padding:12px 8px 18px}
-#equipmentTitle{margin:0 0 10px;font-size:17px;line-height:1.3;color:#4f3b29;text-align:center}
+#statusLine{margin-top:5px;display:flex;justify-content:center;gap:9px;font-size:17px}
+#topRight{display:grid;grid-template-columns:46px 46px;grid-template-rows:38px 38px;gap:4px 5px;padding:6px 5px;justify-content:end}
+#loadButton{grid-column:1;grid-row:1}#saveButton{grid-column:2;grid-row:1}#logButton{grid-column:2;grid-row:2}
+.system-button{width:46px;height:38px;border:1px solid #776047;border-radius:7px;background:#49382a;color:#f2dfbe;padding:2px;display:flex;flex-direction:column;justify-content:center;align-items:center;font-weight:800}
+.system-button .icon{font-size:17px;line-height:1}.system-button .label{font-size:10px;margin-top:2px}
+#mainArea{min-height:0;display:grid;grid-template-columns:108px minmax(0,1fr);overflow:hidden}
+#equipmentArea{min-height:0;overflow-y:auto;background:#cab591;border-right:1px solid #9e8765;padding:12px 8px}
+#equipmentTitle{margin:0 0 10px;text-align:center;font-size:17px;color:#4f3b29}
 #equipmentList{display:grid;gap:8px}
-.equipment-side-item{padding:8px 5px;border:1px solid #9b815e;border-radius:6px;background:#ead5b2;color:#3b2b1e;text-align:center;font-size:17px;line-height:1.35;font-weight:750;overflow-wrap:anywhere}
-.equipment-side-item small{display:block;margin-top:3px;color:#725b42;font-size:15px;line-height:1.3;font-weight:650}
-.equipment-side-empty{margin:4px 0;color:#725b42;font-size:17px;line-height:1.55;text-align:center}
+.equipment-side-item{padding:8px 5px;border:1px solid #9b815e;border-radius:6px;background:#ead5b2;text-align:center;font-size:17px;font-weight:750;overflow-wrap:anywhere}
+.equipment-side-item small{display:block;margin-top:3px;color:#725b42;font-size:15px}.equipment-side-empty{font-size:17px;text-align:center;color:#725b42}
 #storyArea{min-width:0;min-height:0;overflow-y:auto;background:#f1e3c9;padding:17px 16px 26px}
 #speakerName{margin-bottom:9px;font-size:20px;font-weight:850;color:#5e4630}
 #messageText{margin:0;font-size:17px;line-height:1.9;white-space:pre-wrap}
-
-#quickBar{position:relative;z-index:20;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding:7px 9px calc(7px + env(safe-area-inset-bottom));background:#30241b;border-top:1px solid #71593f}
+#quickBar{z-index:20;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding:7px 9px calc(7px + env(safe-area-inset-bottom));background:#30241b;border-top:1px solid #71593f}
 .quick-button{min-height:50px;border:1px solid #806849;border-radius:8px;background:#ead4ae;color:#352719;padding:7px 5px;font-size:17px;font-weight:850}
-.quick-button:active{transform:translateY(1px)}
-
 #windowLayer{position:absolute;z-index:100;inset:92px 8px calc(72px + env(safe-area-inset-bottom)) 8px;pointer-events:none}
-#gameWindow{position:relative;width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden;border:2px solid #6e563d;border-radius:10px;background:#f0e1c5;box-shadow:0 8px 25px rgba(0,0,0,.38);pointer-events:auto}
+#gameWindow{width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden;border:2px solid #6e563d;border-radius:10px;background:#f0e1c5;box-shadow:0 8px 25px rgba(0,0,0,.38);pointer-events:auto}
 #windowHeader{min-height:52px;display:flex;align-items:center;justify-content:space-between;padding:5px 7px 5px 12px;background:#d6bd94;border-bottom:1px solid #866e4f}
-#windowTitle{font-size:20px;font-weight:850}
-#windowCloseButton{width:42px;height:42px;border:1px solid #7c6245;border-radius:50%;background:#f2dec0;color:#3a2a1d;font-size:24px;font-weight:750}
+#windowTitle{font-size:20px;font-weight:850}#windowCloseButton{width:42px;height:42px;border:1px solid #7c6245;border-radius:50%;background:#f2dec0;color:#3a2a1d;font-size:24px;font-weight:750}
 #windowContent{flex:1;min-height:0;overflow:auto;padding:12px 13px 18px;font-size:17px;line-height:1.7}
-
-/* ITEM */
-.inventory-screen{font-size:17px;line-height:1.55}
-.inventory-money{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}
-.inventory-money span{min-height:48px;display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid #a98d67;border-radius:6px;background:#dfc8a5;font-size:17px}
-.inventory-money strong{font-size:19px}
-.inventory-weight{margin-bottom:16px;text-align:right;font-size:17px}
-.inventory-title{margin:14px 0 7px;font-size:20px}
-.inventory-row{width:100%;min-height:60px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;margin-bottom:7px;padding:9px 11px;border:1px solid #a98d67;border-radius:7px;background:#f8ead0;color:#342719;text-align:left}
-.inventory-name{min-width:0;display:flex;flex-direction:column}
-.inventory-name strong{font-size:17px;line-height:1.3}
-.inventory-name small{margin-top:2px;font-size:17px;line-height:1.3;color:#715a40}
-.inventory-row-side{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:2px}
-.inventory-row-meta{font-size:16px;line-height:1.2;color:#715a40;font-weight:750;white-space:nowrap}
-.inventory-quantity{font-size:17px;font-weight:850;white-space:nowrap}
-.inventory-row.equipped{background:#dfc8a5;border-color:#8d704d}
-.inventory-empty{margin:7px 0 13px;font-size:17px;color:#715a40}
-.item-back{min-height:48px;margin-bottom:10px;padding:8px 12px;border:1px solid #a98d67;border-radius:6px;background:#ead6b5;color:#352719;font-size:17px;font-weight:750}
-.item-detail{font-size:17px}
-.item-detail h2{margin:4px 0;font-size:22px;line-height:1.4}
-.item-ja,.item-owned-count{font-size:17px}
-.item-equipped-label{margin:8px 0;padding:8px 10px;border-left:4px solid #806849;background:#dfc8a5;font-size:17px;font-weight:800}
-.item-text-section{margin:12px 0;padding:11px 12px;border:1px solid #b89c74;border-radius:7px;background:#f8ead0}
-.item-text-section h3,.item-list-section h3{margin:0 0 6px;font-size:18px;color:#533d28}
-.item-text-section p{margin:0;font-size:17px;line-height:1.75;white-space:pre-wrap}
-.item-stat-list{margin-top:12px;border-top:1px solid #c4aa84}
-.item-stat{min-height:48px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #c4aa84;font-size:17px}
-.item-list-section ul{padding-left:24px;font-size:17px}
-.item-actions{display:grid;gap:8px;margin-top:16px}
-.item-actions button{min-height:52px;border:1px solid #806849;border-radius:7px;background:#ead4ae;color:#352719;font-size:17px;font-weight:800}
-
-/* SKILL */
-.skill-summary{margin:0 0 10px;padding:9px 10px;border:1px solid #a48a64;border-radius:6px;background:#e1c9a2;font-size:17px;font-weight:750}
-.skill-list{display:grid;gap:7px}
-.skill-row{padding:9px 10px;border:1px solid #ad936d;border-radius:7px;background:#f8ead0}
-.skill-main{display:grid;grid-template-columns:minmax(0,1fr) 44px 48px;gap:6px;align-items:center}
-.skill-name{min-width:0;font-size:17px;font-weight:850;line-height:1.3}
-.skill-name small{display:block;margin-top:2px;color:#765f45;font-size:15px;font-weight:700}
-.skill-ability,.skill-mod{min-height:34px;display:grid;place-items:center;border:1px solid #a98d67;border-radius:5px;background:#dfc8a5;font-size:15px;font-weight:850}
-.skill-mod{background:#ead6b5;font-size:17px}
-.skill-prof-label{margin-top:5px;font-size:15px;color:#6b543c}
-.skill-row.proficient{border-color:#76583c;background:#ead7b7}
-
-/* SPELL */
-.spell-intro{margin:0 0 12px;padding:9px 10px;border:1px solid #a48a64;border-radius:6px;background:#e1c9a2;font-size:17px;line-height:1.55}
-.spell-section{margin:15px 0 0}
-.spell-section h3{margin:0 0 7px;font-size:19px;color:#533d28}
-.spell-grid{display:grid;gap:7px}
-.spell-card{padding:10px 11px;border:1px solid #ad936d;border-radius:7px;background:#f8ead0;font-size:17px;font-weight:750;line-height:1.45}
-.spell-source{display:block;margin-top:3px;color:#715a40;font-size:15px;font-weight:650}
-.spell-empty{padding:15px;border:1px dashed #a48a64;border-radius:7px;color:#715a40;font-size:17px;text-align:center}
-
-@media(max-width:430px){
-  #topBar{grid-template-columns:50px minmax(0,1fr) 104px}
-  #topRight{grid-template-columns:43px 43px}
-  .system-button{width:43px}
-  #dateTime{font-size:17px}
-  #currentLocation{font-size:17px}
-  #statusLine{gap:7px;font-size:16px}
-  #mainArea{grid-template-columns:104px minmax(0,1fr)}
-  #storyArea{padding:15px 13px 24px}
-}
+.inventory-money{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}.inventory-money span{min-height:48px;display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid #a98d67;background:#dfc8a5;font-size:17px}
+.inventory-weight{text-align:right;font-size:17px}.inventory-title{font-size:20px}.inventory-row{width:100%;min-height:60px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;margin-bottom:7px;padding:9px 11px;border:1px solid #a98d67;border-radius:7px;background:#f8ead0;color:#342719;text-align:left}.inventory-name{display:flex;flex-direction:column}.inventory-name strong,.inventory-name small,.inventory-quantity{font-size:17px}.inventory-name small,.inventory-row-meta{color:#715a40}.inventory-row-side{display:flex;flex-direction:column;align-items:flex-end}.inventory-row.equipped{background:#dfc8a5}.inventory-empty{font-size:17px}.item-back,.item-actions button{min-height:48px;border:1px solid #806849;border-radius:7px;background:#ead4ae;color:#352719;font-size:17px;font-weight:800;padding:8px 12px}.item-detail,.item-ja,.item-owned-count,.item-text-section p,.item-stat{font-size:17px}.item-detail h2{font-size:22px}.item-text-section{margin:12px 0;padding:11px;border:1px solid #b89c74;background:#f8ead0}.item-text-section h3,.item-list-section h3{font-size:18px}.item-stat{min-height:48px;display:flex;justify-content:space-between;border-bottom:1px solid #c4aa84;align-items:center}.item-actions{display:grid;gap:8px;margin-top:16px}
+.skill-summary,.spell-intro{margin:0 0 10px;padding:9px 10px;border:1px solid #a48a64;border-radius:6px;background:#e1c9a2;font-size:17px;font-weight:750}.skill-list,.spell-grid{display:grid;gap:7px}.skill-row,.spell-card{padding:9px 10px;border:1px solid #ad936d;border-radius:7px;background:#f8ead0}.skill-row.proficient{background:#ead7b7;border-color:#76583c}.skill-main{display:grid;grid-template-columns:minmax(0,1fr) 44px 48px;gap:6px;align-items:center}.skill-name{font-size:17px;font-weight:850}.skill-name small{display:block;font-size:15px;color:#765f45}.skill-ability,.skill-mod{min-height:34px;display:grid;place-items:center;border:1px solid #a98d67;background:#dfc8a5;font-size:15px;font-weight:850}.skill-mod{font-size:17px;background:#ead6b5}.skill-prof-label,.spell-source{display:block;margin-top:4px;color:#715a40;font-size:15px}.spell-section{margin-top:15px}.spell-section h3{margin:0 0 7px;font-size:19px}.spell-card{font-size:17px;font-weight:750}.spell-empty{padding:15px;border:1px dashed #a48a64;font-size:17px;text-align:center;color:#715a40}
+@media(max-width:430px){#topBar{grid-template-columns:50px minmax(0,1fr) 104px}#topRight{grid-template-columns:43px 43px}.system-button{width:43px}#mainArea{grid-template-columns:104px minmax(0,1fr)}#statusLine{font-size:16px;gap:6px}#storyArea{padding:15px 13px 24px}}
 </style>
 </head>
 <body>
 <div id="gameScreen">
-  <header id="topBar">
-    <div id="topLeft">
-      <button id="topButton" class="system-button" type="button"><span class="icon">⌂</span><span class="label">TOP</span></button>
-    </div>
-    <div id="topCenter">
-      <div id="dateTime"><span id="gameDate">Day 1</span> ・ <span id="gameTime">08:00</span></div>
-      <div id="currentLocation">未設定</div>
-      <div id="statusLine">
-        <span>HP <strong id="miniHp">-</strong></span>
-        <span>AC <strong id="miniAc">-</strong></span>
-        <span>Lv. <strong id="miniLevel">1</strong></span>
-      </div>
-    </div>
-    <div id="topRight">
-      <button id="loadButton" class="system-button" type="button"><span class="icon">⇩</span><span class="label">LOAD</span></button>
-      <button id="saveButton" class="system-button" type="button"><span class="icon">▣</span><span class="label">SAVE</span></button>
-      <button id="logButton" class="system-button" type="button"><span class="icon">≡</span><span class="label">LOG</span></button>
-    </div>
-  </header>
-
-  <main id="mainArea">
-    <aside id="equipmentArea" aria-label="現在の装備">
-      <h2 id="equipmentTitle">装備</h2>
-      <div id="equipmentList"><p class="equipment-side-empty">装備なし</p></div>
-    </aside>
-    <section id="storyArea">
-      <div id="speakerName">Brackenford</div>
-      <p id="messageText">石造りの建物が並ぶ町だ。
-通りには旅人と商人の姿が見える。</p>
-    </section>
-  </main>
-
-  <nav id="quickBar" aria-label="キャラクターデータ">
-    <button id="itemButton" class="quick-button" type="button">所持品</button>
-    <button id="skillButton" class="quick-button" type="button">スキル</button>
-    <button id="spellButton" class="quick-button" type="button">呪文</button>
-  </nav>
-
-  <div id="windowLayer" hidden>
-    <section id="gameWindow" role="dialog" aria-modal="true">
-      <header id="windowHeader">
-        <div id="windowTitle">所持品</div>
-        <button id="windowCloseButton" type="button" aria-label="閉じる">×</button>
-      </header>
-      <div id="windowContent"></div>
-    </section>
-  </div>
+<header id="topBar">
+  <div id="topLeft"><button id="topButton" class="system-button" type="button"><span class="icon">⌂</span><span class="label">TOP</span></button></div>
+  <div id="topCenter"><div id="dateTime"><span id="gameDate">Day 1</span> ・ <span id="gameTime">08:00</span></div><div id="currentLocation">未設定</div><div id="statusLine"><span>HP <strong id="miniHp">-</strong></span><span>AC <strong id="miniAc">-</strong></span><span>Lv. <strong id="miniLevel">1</strong></span></div></div>
+  <div id="topRight"><button id="loadButton" class="system-button" type="button"><span class="icon">⇩</span><span class="label">LOAD</span></button><button id="saveButton" class="system-button" type="button"><span class="icon">▣</span><span class="label">SAVE</span></button><button id="logButton" class="system-button" type="button"><span class="icon">≡</span><span class="label">LOG</span></button></div>
+</header>
+<main id="mainArea">
+  <aside id="equipmentArea"><h2 id="equipmentTitle">装備</h2><div id="equipmentList"><p class="equipment-side-empty">装備なし</p></div></aside>
+  <section id="storyArea"><div id="speakerName">Brackenford</div><p id="messageText">石造りの建物が並ぶ町だ。
+通りには旅人と商人の姿が見える。</p></section>
+</main>
+<nav id="quickBar"><button id="itemButton" class="quick-button" type="button">所持品</button><button id="skillButton" class="quick-button" type="button">スキル</button><button id="spellButton" class="quick-button" type="button">呪文</button></nav>
+<div id="windowLayer" hidden><section id="gameWindow"><header id="windowHeader"><div id="windowTitle">所持品</div><button id="windowCloseButton" type="button">×</button></header><div id="windowContent"></div></section></div>
 </div>
-
-<script src="data/dd-srd-character.js?v=20260830-1"></script>
-<script src="data/dd-class-options.js?v=20260830-1"></script>
-<script src="data/dd-items.js?v=20260830-1"></script>
-<script src="js/dd-inventory.js?v=20260830-1"></script>
-<script src="js/dd-inventory-ui.js?v=20260830-1"></script>
-<script src="js/dd-github.js?v=20260830-1"></script>
-<script src="js/dd-save.js?v=20260830-1"></script>
+<script src="data/dd-srd-character.js?v=20260830-2"></script>
+<script src="data/dd-class-options.js?v=20260830-2"></script>
+<script src="data/dd-items.js?v=20260830-2"></script>
+<script src="js/dd-inventory.js?v=20260830-2"></script>
+<script src="js/dd-inventory-ui.js?v=20260830-2"></script>
+<script src="js/dd-github.js?v=20260830-2"></script>
+<script src="js/dd-save.js?v=20260830-2"></script>
 <script>
 'use strict';
-
 const $=id=>document.getElementById(id);
-const topButton=$('topButton');
-const loadButton=$('loadButton');
-const saveButton=$('saveButton');
-const logButton=$('logButton');
-const itemButton=$('itemButton');
-const skillButton=$('skillButton');
-const spellButton=$('spellButton');
-const windowLayer=$('windowLayer');
-const windowTitle=$('windowTitle');
-const windowContent=$('windowContent');
-const windowCloseButton=$('windowCloseButton');
-
-function escHtml(value){
-  return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-}
-function activeGame(){
-  try{return JSON.parse(localStorage.getItem('ddActiveGame')||'null');}catch(_){return null;}
-}
+const windowLayer=$('windowLayer'),windowTitle=$('windowTitle'),windowContent=$('windowContent');
+function escHtml(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+function activeGame(){try{return JSON.parse(localStorage.getItem('ddActiveGame')||'null');}catch(_){return null;}}
 function fmtMod(value){return value>=0?`+${value}`:String(value);}
 function abilityMod(score){return Math.floor(((Number(score)||10)-10)/2);}
-function proficiencyBonusFromLevel(level){
-  const lv=Math.max(1,Math.min(20,Math.floor(Number(level)||1));
-  return Math.min(6,2+Math.floor((lv-1)/4));
-}
-function itemSlotLabel(slot){
-  return ({mainHand:'主武器',offHand:'副手',armor:'防具',other:'その他'})[slot]||'装備';
-}
-
-function renderHeader(){
-  const game=activeGame();
-  const c=game?.character||{};
-  const time=game?.time||{};
-  const current=game?.current||{};
-  const location=game?.location?.label||current.location||'未設定';
-  const day=time.day??current.day??1;
-  const hour=time.hour??8;
-  const minute=time.minute??0;
-  $('gameDate').textContent=`Day ${day}`;
-  $('gameTime').textContent=time.hour!=null?`${String(hour).padStart(2,'0')}:${String(minute).padStart(2,'0')}`:(current.time||'08:00');
-  $('currentLocation').textContent=location;
-  $('miniHp').textContent=c.maxHp!=null?`${c.hp??c.maxHp}/${c.maxHp}`:(c.hp??'-');
-  $('miniLevel').textContent=c.level??1;
-  $('miniAc').textContent=calculateAc(game);
-}
-
+function proficiencyBonusFromLevel(level){const lv=Math.max(1,Math.min(20,Math.floor(Number(level)||1)));return Math.min(6,2+Math.floor((lv-1)/4));}
+function slotLabel(slot){return ({mainHand:'主武器',offHand:'副手',armor:'防具',other:'その他'})[slot]||'装備';}
 function calculateAc(game){
-  const c=game?.character||{};
-  const dex=abilityMod(c.abilities?.dex);
-  const equipment=Array.isArray(game?.equipment)?game.equipment:[];
-  const inventory=Array.isArray(game?.inventory)?game.inventory:[];
-  let ac=10+dex;
-  let armorFound=false;
-  let bonus=0;
-  for(const entry of equipment){
-    const owned=inventory.find(item=>item.uid===entry.uid)||inventory.find(item=>item.itemId===entry.itemId);
-    const data=window.DDInventory?.itemData(entry.itemId||owned?.itemId);
-    if(!data)continue;
-    if(data.type==='armor'&&data.id!=='shield'&&data.ac!=null){ac=Number(data.ac);armorFound=true;}
-    if(data.acBonus!=null)bonus+=Number(data.acBonus)||0;
-  }
-  if(!armorFound)ac=10+dex;
-  return ac+bonus;
+  const c=game?.character||{},dex=abilityMod(c.abilities?.dex),equipment=Array.isArray(game?.equipment)?game.equipment:[],inventory=Array.isArray(game?.inventory)?game.inventory:[];
+  let ac=10+dex,armorFound=false,bonus=0;
+  for(const entry of equipment){const owned=inventory.find(i=>i.uid===entry.uid)||inventory.find(i=>i.itemId===entry.itemId);const data=window.DDInventory?.itemData(entry.itemId||owned?.itemId);if(!data)continue;if(data.type==='armor'&&data.id!=='shield'&&data.ac!=null){ac=Number(data.ac);armorFound=true;}if(data.acBonus!=null)bonus+=Number(data.acBonus)||0;}
+  if(!armorFound)ac=10+dex;return ac+bonus;
 }
-
-function renderEquipmentSidebar(){
-  const root=$('equipmentList');
-  const game=activeGame();
-  const inventory=Array.isArray(game?.inventory)?game.inventory:[];
-  const equipment=Array.isArray(game?.equipment)?game.equipment:[];
+function renderHeader(){
+  const game=activeGame(),c=game?.character||{},time=game?.time||{},current=game?.current||{};
+  const day=time.day??current.day??1,hour=time.hour??8,minute=time.minute??0;
+  $('gameDate').textContent=`Day ${day}`;$('gameTime').textContent=time.hour!=null?`${String(hour).padStart(2,'0')}:${String(minute).padStart(2,'0')}`:(current.time||'08:00');$('currentLocation').textContent=game?.location?.label||current.location||'未設定';$('miniHp').textContent=c.maxHp!=null?`${c.hp??c.maxHp}/${c.maxHp}`:(c.hp??'-');$('miniAc').textContent=calculateAc(game);$('miniLevel').textContent=c.level??1;
+}
+function renderEquipment(){
+  const root=$('equipmentList'),game=activeGame(),inventory=Array.isArray(game?.inventory)?game.inventory:[],equipment=Array.isArray(game?.equipment)?game.equipment:[];
   if(!equipment.length){root.innerHTML='<p class="equipment-side-empty">装備なし</p>';return;}
-  root.innerHTML=equipment.map(entry=>{
-    const owned=inventory.find(item=>item.uid===entry.uid)||inventory.find(item=>item.itemId===entry.itemId);
-    const itemId=entry.itemId||owned?.itemId||'';
-    const data=window.DDInventory?.itemData(itemId);
-    const name=data?.ja||data?.name||itemId||'装備';
-    return `<div class="equipment-side-item">${escHtml(name)}<small>${escHtml(itemSlotLabel(entry.slot))}</small></div>`;
-  }).join('');
+  root.innerHTML=equipment.map(entry=>{const owned=inventory.find(i=>i.uid===entry.uid)||inventory.find(i=>i.itemId===entry.itemId);const id=entry.itemId||owned?.itemId||'';const data=window.DDInventory?.itemData(id);return `<div class="equipment-side-item">${escHtml(data?.ja||data?.name||id||'装備')}<small>${escHtml(slotLabel(entry.slot))}</small></div>`;}).join('');
 }
-
-function openWindow(title,html=''){
-  windowTitle.textContent=title;
-  windowContent.innerHTML=html;
-  windowLayer.hidden=false;
+function openWindow(title,html=''){windowTitle.textContent=title;windowContent.innerHTML=html;windowLayer.hidden=false;}
+function closeWindow(){windowLayer.hidden=true;renderEquipment();renderHeader();}
+const skillDefs=[['Acrobatics','軽業','dex'],['Animal Handling','動物使い','wis'],['Arcana','魔法学','int'],['Athletics','運動','str'],['Deception','ペテン','cha'],['History','歴史','int'],['Insight','看破','wis'],['Intimidation','威圧','cha'],['Investigation','捜査','int'],['Medicine','医術','wis'],['Nature','自然','int'],['Perception','知覚','wis'],['Performance','芸能','cha'],['Persuasion','説得','cha'],['Religion','宗教','int'],['Sleight of Hand','手先の早業','dex'],['Stealth','隠密','dex'],['Survival','生存','wis']];
+function renderSkills(){
+  const game=activeGame(),c=game?.character||{},level=Math.max(1,Math.floor(Number(c.level)||1)),pb=proficiencyBonusFromLevel(level),proficient=new Set((c.skills||[]).map(v=>String(v).toLowerCase())),expertise=new Set((Array.isArray(c.classChoices?.expertise)?c.classChoices.expertise:[]).map(v=>String(v).toLowerCase()));
+  const rows=skillDefs.map(([name,ja,ability])=>{const key=name.toLowerCase(),expert=expertise.has(key),prof=expert||proficient.has(key),total=abilityMod(c.abilities?.[ability])+(expert?pb*2:prof?pb:0);return `<div class="skill-row ${prof?'proficient':''}"><div class="skill-main"><div class="skill-name">${escHtml(name)}<small>${escHtml(ja)}</small></div><div class="skill-ability">${ability.toUpperCase()}</div><div class="skill-mod">${fmtMod(total)}</div></div><div class="skill-prof-label">${expert?'Expertise':prof?'● 習熟':'未習熟'}</div></div>`;}).join('');
+  return `<div class="skill-summary">Lv.${level}　習熟ボーナス ${fmtMod(pb)}</div><div class="skill-list">${rows}</div>`;
 }
-function closeWindow(){
-  windowLayer.hidden=true;
-  renderEquipmentSidebar();
-  renderHeader();
-}
-
-const skillDefs=[
-  ['Acrobatics','軽業','dex'],['Animal Handling','動物使い','wis'],['Arcana','魔法学','int'],['Athletics','運動','str'],
-  ['Deception','ペテン','cha'],['History','歴史','int'],['Insight','看破','wis'],['Intimidation','威圧','cha'],
-  ['Investigation','捜査','int'],['Medicine','医術','wis'],['Nature','自然','int'],['Perception','知覚','wis'],
-  ['Performance','芸能','cha'],['Persuasion','説得','cha'],['Religion','宗教','int'],['Sleight of Hand','手先の早業','dex'],
-  ['Stealth','隠密','dex'],['Survival','生存','wis']
-];
-
-function renderSkillWindow(){
-  const game=activeGame();
-  const c=game?.character||{};
-  const abilities=c.abilities||{};
-  const level=Math.max(1,Math.floor(Number(c.level)||1));
-  const proficiencyBonus=proficiencyBonusFromLevel(level);
-  const proficient=new Set((Array.isArray(c.skills)?c.skills:[]).map(v=>String(v).toLowerCase()));
-  const expertiseSource=Array.isArray(c.classChoices?.expertise)?c.classChoices.expertise:[];
-  const expertise=new Set(expertiseSource.map(v=>String(v).toLowerCase()));
-  const rows=skillDefs.map(([name,ja,ability])=>{
-    const key=name.toLowerCase();
-    const isExpert=expertise.has(key);
-    const isProficient=isExpert||proficient.has(key);
-    const total=abilityMod(abilities[ability])+(isExpert?proficiencyBonus*2:isProficient?proficiencyBonus:0);
-    return `<div class="skill-row ${isProficient?'proficient':''}">
-      <div class="skill-main">
-        <div class="skill-name">${escHtml(name)}<small>${escHtml(ja)}</small></div>
-        <div class="skill-ability">${ability.toUpperCase()}</div>
-        <div class="skill-mod">${fmtMod(total)}</div>
-      </div>
-      <div class="skill-prof-label">${isExpert?'Expertise':isProficient?'● 習熟':'未習熟'}</div>
-    </div>`;
-  }).join('');
-  return `<div class="skill-summary">Lv.${level}　習熟ボーナス ${fmtMod(proficiencyBonus)}</div><div class="skill-list">${rows}</div>`;
-}
-
-function normalizeSpellList(value){
-  if(Array.isArray(value))return value.filter(Boolean);
-  if(value)return [value];
-  return [];
-}
-function spellSection(title,values,source=''){
-  const list=[...new Set(normalizeSpellList(values))];
-  if(!list.length)return '';
-  return `<section class="spell-section"><h3>${escHtml(title)}</h3><div class="spell-grid">${list.map(name=>`<div class="spell-card">${escHtml(name)}${source?`<span class="spell-source">${escHtml(source)}</span>`:''}</div>`).join('')}</div></section>`;
-}
-function renderSpellWindow(){
-  const game=activeGame();
-  const c=game?.character||{};
-  const choices=c.classChoices||{};
-  const sections=[];
+function list(value){return Array.isArray(value)?value.filter(Boolean):value?[value]:[];}
+function spellSection(title,values,source=''){const spells=[...new Set(list(values))];if(!spells.length)return '';return `<section class="spell-section"><h3>${escHtml(title)}</h3><div class="spell-grid">${spells.map(name=>`<div class="spell-card">${escHtml(name)}${source?`<span class="spell-source">${escHtml(source)}</span>`:''}</div>`).join('')}</div></section>`;}
+function renderSpells(){
+  const game=activeGame(),c=game?.character||{},choices=c.classChoices||{},sections=[];
   sections.push(spellSection('キャントリップ',choices.cantrips,'クラス'));
-  sections.push(spellSection('準備・習得しているレベル1呪文',choices.preparedSpells,'クラス'));
+  sections.push(spellSection('レベル1呪文',choices.preparedSpells,'クラス'));
   sections.push(spellSection('スペルブック',choices.spellbook,'Wizard'));
-
   const origin=c.originSpells||{};
-  for(const [key,data] of Object.entries(origin)){
-    if(!data||typeof data!=='object')continue;
-    const source=key==='background'?'背景':key==='human'?'Human':key;
-    const detail=[source,data.spellList,data.spellcastingAbility].filter(Boolean).join(' / ');
-    sections.push(spellSection(`${source}：キャントリップ`,data.cantrips,detail));
-    sections.push(spellSection(`${source}：レベル1呪文`,data.level1,detail));
-  }
-
+  for(const [key,data] of Object.entries(origin)){if(!data||typeof data!=='object')continue;const source=key==='background'?'背景':key==='human'?'Human':key;const detail=[source,data.spellList,data.spellcastingAbility].filter(Boolean).join(' / ');sections.push(spellSection(`${source}：キャントリップ`,data.cantrips,detail));sections.push(spellSection(`${source}：レベル1呪文`,data.level1,detail));}
   if(Array.isArray(c.spells))sections.push(spellSection('その他の呪文',c.spells,'キャラクター'));
-  const html=sections.filter(Boolean).join('');
-  const className=c.classNameJa||c.className||'キャラクター';
-  return `<p class="spell-intro">${escHtml(className)}の現在の呪文です。</p>${html||'<div class="spell-empty">現在使用できる呪文はありません。</div>'}`;
+  const html=sections.filter(Boolean).join('');return `<p class="spell-intro">${escHtml(c.classNameJa||c.className||'キャラクター')}の現在の呪文です。</p>${html||'<div class="spell-empty">現在使用できる呪文はありません。</div>'}`;
 }
-
-function renderLogWindow(){
-  const game=activeGame();
-  const log=Array.isArray(game?.log)?game.log:[];
-  if(!log.length)return '<p>ログはまだありません。</p>';
-  return log.map(entry=>`<p>${escHtml(typeof entry==='string'?entry:JSON.stringify(entry))}</p>`).join('');
-}
-
-itemButton.addEventListener('click',()=>{
-  openWindow('所持品');
-  if(window.DDInventoryUI)DDInventoryUI.render(windowContent);
-  else windowContent.innerHTML='<p>所持品データを読み込めませんでした。</p>';
-});
-skillButton.addEventListener('click',()=>openWindow('スキル',renderSkillWindow()));
-spellButton.addEventListener('click',()=>openWindow('呪文',renderSpellWindow()));
-logButton.addEventListener('click',()=>openWindow('LOG',renderLogWindow()));
-windowCloseButton.addEventListener('click',closeWindow);
-
-topButton.addEventListener('click',()=>{location.href='DD_top.html';});
-loadButton.addEventListener('click',()=>{location.href='DD_saves.html';});
-saveButton.addEventListener('click',async()=>{
-  if(saveButton.disabled)return;
-  saveButton.disabled=true;
-  try{
-    const raw=localStorage.getItem('ddActiveGame');
-    if(!raw)throw new Error('セーブするゲームデータがありません。');
-    const saved=await DDSave.openSaveDialog(JSON.parse(raw));
-    localStorage.setItem('ddActiveGame',JSON.stringify(saved));
-    renderEquipmentSidebar();
-    renderHeader();
-  }catch(error){
-    if(error?.message!=='セーブをキャンセルしました。')alert(error?.message||'セーブに失敗しました。');
-  }finally{saveButton.disabled=false;}
-});
-
-if(window.DDInventory)DDInventory.getGame();
-renderEquipmentSidebar();
-renderHeader();
+function renderLog(){const log=activeGame()?.log||[];return Array.isArray(log)&&log.length?log.map(v=>`<p>${escHtml(typeof v==='string'?v:JSON.stringify(v))}</p>`).join(''):'<p>ログはまだありません。</p>';}
+$('itemButton').addEventListener('click',()=>{openWindow('所持品');if(window.DDInventoryUI)DDInventoryUI.render(windowContent);else windowContent.innerHTML='<p>所持品を読み込めませんでした。</p>';});
+$('skillButton').addEventListener('click',()=>openWindow('スキル',renderSkills()));
+$('spellButton').addEventListener('click',()=>openWindow('呪文',renderSpells()));
+$('logButton').addEventListener('click',()=>openWindow('LOG',renderLog()));
+$('windowCloseButton').addEventListener('click',closeWindow);
+$('topButton').addEventListener('click',()=>location.href='DD_top.html');
+$('loadButton').addEventListener('click',()=>location.href='DD_saves.html');
+$('saveButton').addEventListener('click',async()=>{const button=$('saveButton');if(button.disabled)return;button.disabled=true;try{const raw=localStorage.getItem('ddActiveGame');if(!raw)throw new Error('セーブするゲームデータがありません。');const saved=await DDSave.openSaveDialog(JSON.parse(raw));localStorage.setItem('ddActiveGame',JSON.stringify(saved));renderEquipment();renderHeader();}catch(error){if(error?.message!=='セーブをキャンセルしました。')alert(error?.message||'セーブに失敗しました。');}finally{button.disabled=false;}});
+if(window.DDInventory)DDInventory.getGame();renderEquipment();renderHeader();
 </script>
 </body>
 </html>
