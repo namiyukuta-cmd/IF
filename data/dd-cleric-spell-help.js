@@ -24,11 +24,19 @@
     'Shield of Faith': '対象：自分を含め、範囲内のクリーチャー1体。ACを上げて守る防御魔法。自分にも使える。'
   };
 
+  function refreshRenderedChoices() {
+    setTimeout(() => {
+      const background = document.getElementById('background');
+      if (background) background.dispatchEvent(new Event('change', { bubbles: true }));
+    }, 0);
+  }
+
   function patch(labels) {
     if (!labels?.spells) return labels;
     for (const [name, description] of Object.entries(descriptions)) {
       if (labels.spells[name]) labels.spells[name][1] = description;
     }
+    if (typeof document !== 'undefined') refreshRenderedChoices();
     return labels;
   }
 
