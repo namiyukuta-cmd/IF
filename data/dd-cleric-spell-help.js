@@ -1,7 +1,4 @@
 (() => {
-  const labels = window.DD_JA_LABELS;
-  if (!labels?.spells) return;
-
   const descriptions = {
     'Guidance': '対象：自分または触れたクリーチャー1体。能力判定を助ける基本魔法。',
     'Light': '対象：物体1つ。物を光らせて周囲を照らす。自分自身にかける呪文ではないが、自分の持ち物を光らせて使える。',
@@ -10,7 +7,6 @@
     'Sacred Flame': '対象：範囲内で見えるクリーチャー1体。聖なる炎で攻撃する。通常は敵に使う攻撃魔法。',
     'Spare the Dying': '対象：HPが0になっているクリーチャー1体。死亡しかけている相手を安定化させる。自分がHP0のときは通常この呪文を唱えられない。',
     'Thaumaturgy': '対象：主に自分の周囲や指定した小さな現象。声を響かせる、炎を変化させるなどの神聖な小技を起こす。',
-
     'Bane': '対象：範囲内で見えるクリーチャー最大3体。攻撃ロールやセーヴィング・スローを妨害する。通常は敵に使う。',
     'Bless': '対象：自分を含め、範囲内のクリーチャー最大3体。攻撃ロールとセーヴィング・スローを助ける。自分にも使える。',
     'Command': '対象：範囲内で見えるクリーチャー1体。短い命令を魔法で相手に実行させる。通常は敵や従わせたい相手に使う。',
@@ -28,7 +24,30 @@
     'Shield of Faith': '対象：自分を含め、範囲内のクリーチャー1体。ACを上げて守る防御魔法。自分にも使える。'
   };
 
-  for (const [name, description] of Object.entries(descriptions)) {
-    if (labels.spells[name]) labels.spells[name][1] = description;
+  function patch(labels) {
+    if (!labels?.spells) return labels;
+    for (const [name, description] of Object.entries(descriptions)) {
+      if (labels.spells[name]) labels.spells[name][1] = description;
+    }
+    return labels;
   }
+
+  if (window.DD_JA_LABELS) {
+    patch(window.DD_JA_LABELS);
+    return;
+  }
+
+  Object.defineProperty(window, 'DD_JA_LABELS', {
+    configurable: true,
+    enumerable: true,
+    get() { return undefined; },
+    set(value) {
+      Object.defineProperty(window, 'DD_JA_LABELS', {
+        value: patch(value),
+        writable: true,
+        configurable: true,
+        enumerable: true
+      });
+    }
+  });
 })();
