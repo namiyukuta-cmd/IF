@@ -1,204 +1,217 @@
 window.DD_JA_LABELS={
-skills:{'Acrobatics':'軽業','Animal Handling':'動物使い','Arcana':'魔法学','Athletics':'運動','Deception':'ペテン','History':'歴史','Insight':'看破','Intimidation':'威圧','Investigation':'捜査','Medicine':'医術','Nature':'自然','Perception':'知覚','Performance':'芸能','Persuasion':'説得','Religion':'宗教','Sleight of Hand':'手先の早業','Stealth':'隠密','Survival':'生存'},
-languages:{'Common Sign Language':'共通手話','Draconic':'竜語','Dwarvish':'ドワーフ語','Elvish':'エルフ語','Giant':'巨人語','Gnomish':'ノーム語','Goblin':'ゴブリン語','Halfling':'ハーフリング語','Orc':'オーク語'},
-alignments:{'Lawful Good':'秩序にして善','Neutral Good':'中立にして善','Chaotic Good':'混沌にして善','Lawful Neutral':'秩序にして中立','Neutral':'真なる中立','Chaotic Neutral':'混沌にして中立','Lawful Evil':'秩序にして悪','Neutral Evil':'中立にして悪','Chaotic Evil':'混沌にして悪'},
-feats:{'Alert':'警戒','Crafter':'製作者','Healer':'治療師','Lucky':'幸運','Magic Initiate':'魔法のたしなみ','Musician':'音楽家','Savage Attacker':'猛攻','Skilled':'技能習熟','Tavern Brawler':'酒場流喧嘩殺法','Tough':'頑健'},
-species:{Dragonborn:'ドラゴンボーン',Dwarf:'ドワーフ',Elf:'エルフ',Gnome:'ノーム',Goliath:'ゴライアス',Halfling:'ハーフリング',Human:'ヒューマン',Orc:'オーク',Tiefling:'ティーフリング'},
-terms:{'Cantrip':'キャントリップ（初級呪文）','Skill Proficiency':'技能習熟','Origin Feat':'オリジン特技','Background':'背景・出自','Species':'種族','Language':'言語','Common':'共通語'},
-label(value,group){const m=this[group]||{};return m[value]?`${value}（${m[value]}）`:value;}
+  skills:{
+    'Acrobatics':'軽業','Animal Handling':'動物使い','Arcana':'魔法学','Athletics':'運動','Deception':'ペテン','History':'歴史','Insight':'看破','Intimidation':'威圧','Investigation':'捜査','Medicine':'医術','Nature':'自然','Perception':'知覚','Performance':'芸能','Persuasion':'説得','Religion':'宗教','Sleight of Hand':'手先の早業','Stealth':'隠密','Survival':'生存'
+  },
+  skillDescriptions:{
+    'Acrobatics':'バランスを取る、身をかわす、体を器用に動かす判定。',
+    'Animal Handling':'動物を落ち着かせたり、扱ったりする判定。',
+    'Arcana':'魔法、呪文、魔法の品、魔法的な現象についての知識。',
+    'Athletics':'登る、跳ぶ、泳ぐ、押すなど力を使う行動。',
+    'Deception':'嘘をつく、正体や意図を隠すなど相手をだます判定。',
+    'History':'国、人物、戦争、事件など過去の出来事についての知識。',
+    'Insight':'相手の本心、感情、嘘などを読み取る判定。',
+    'Intimidation':'脅しや迫力で相手を動かす判定。',
+    'Investigation':'手掛かりを調べ、情報を組み合わせて推理する判定。',
+    'Medicine':'傷病人の状態を見たり、応急的な処置をしたりする判定。',
+    'Nature':'植物、動物、天候、地形など自然についての知識。',
+    'Perception':'音、気配、隠れたものなど周囲の変化に気づく判定。',
+    'Performance':'歌、演奏、演技などで人前に披露する判定。',
+    'Persuasion':'話し合いや交渉で相手を納得させる判定。',
+    'Religion':'神々、宗教、儀式、聖なるものについての知識。',
+    'Sleight of Hand':'こっそり物を動かす、細かな手作業をする判定。',
+    'Stealth':'音や姿を隠して気づかれないように行動する判定。',
+    'Survival':'追跡、道探し、野外で生き延びるための判定。'
+  },
+  languages:{
+    'Common Sign Language':'共通手話','Draconic':'竜語','Dwarvish':'ドワーフ語','Elvish':'エルフ語','Giant':'巨人語','Gnomish':'ノーム語','Goblin':'ゴブリン語','Halfling':'ハーフリング語','Orc':'オーク語'
+  },
+  languageDescriptions:{
+    'Common Sign Language':'広く使われる共通手話。声を使わずに意思を伝えられる。',
+    'Draconic':'ドラゴンやドラゴンボーンと関わりの深い言語。',
+    'Dwarvish':'ドワーフの文化で使われる言語。',
+    'Elvish':'エルフの文化で使われる言語。',
+    'Giant':'巨人族と関わりの深い言語。',
+    'Gnomish':'ノームの文化で使われる言語。',
+    'Goblin':'ゴブリンなどゴブリン系の民と関わりの深い言語。',
+    'Halfling':'ハーフリングの文化で使われる言語。',
+    'Orc':'オークの文化で使われる言語。'
+  },
+  alignments:{
+    'Lawful Good':'秩序にして善','Neutral Good':'中立にして善','Chaotic Good':'混沌にして善','Lawful Neutral':'秩序にして中立','Neutral':'真なる中立','Chaotic Neutral':'混沌にして中立','Lawful Evil':'秩序にして悪','Neutral Evil':'中立にして悪','Chaotic Evil':'混沌にして悪'
+  },
+  alignmentDescriptions:{
+    'Lawful Good':'善いことをしながら、規則や秩序も重んじる。',
+    'Neutral Good':'規則や自由よりも、まず善い結果を重んじる。',
+    'Chaotic Good':'善いことをしたいが、規則より自由や自分の判断を重んじる。',
+    'Lawful Neutral':'善悪よりも、規則・義務・秩序を重んじる。',
+    'Neutral':'善悪や秩序・自由のどちらかに強く偏らない。',
+    'Chaotic Neutral':'善悪よりも、自分の自由やその時の判断を重んじる。',
+    'Lawful Evil':'自分の利益や悪意のためでも、規則や組織を利用する。',
+    'Neutral Evil':'秩序や自由にこだわらず、自分の利益を優先する。',
+    'Chaotic Evil':'自分の欲望や破壊を優先し、規則にも縛られない。'
+  },
+  feats:{
+    'Alert':'警戒','Crafter':'製作者','Healer':'治療師','Lucky':'幸運','Magic Initiate':'魔法のたしなみ','Musician':'音楽家','Savage Attacker':'猛攻','Skilled':'技能習熟','Tavern Brawler':'酒場流喧嘩殺法','Tough':'頑健'
+  },
+  featDescriptions:{
+    'Alert':'戦闘開始時のイニシアチブを得意にし、味方との行動順の調整もできる初期特技。',
+    'Crafter':'道具の扱いや製作に強くなり、装備の購入や作成で役立つ初期特技。',
+    'Healer':'治療道具を使った回復を得意にする初期特技。',
+    'Lucky':'運が必要な場面で判定を有利にしやすくする初期特技。',
+    'Magic Initiate':'Cleric・Druid・Wizardのいずれかの魔法を少し使えるようになる初期特技。キャントリップ2個とレベル1呪文1個を選ぶ。',
+    'Musician':'楽器の演奏で仲間を支援できる初期特技。',
+    'Savage Attacker':'武器攻撃のダメージをより良い結果にしやすくする初期特技。',
+    'Skilled':'技能または道具の習熟を合計3つ増やす初期特技。',
+    'Tavern Brawler':'素手攻撃や即席武器を使った乱闘を得意にする初期特技。',
+    'Tough':'最大HPを増やし、打たれ強くなる初期特技。'
+  },
+  species:{Dragonborn:'ドラゴンボーン',Dwarf:'ドワーフ',Elf:'エルフ',Gnome:'ノーム',Goliath:'ゴライアス',Halfling:'ハーフリング',Human:'ヒューマン',Orc:'オーク',Tiefling:'ティーフリング'},
+  speciesDescriptions:{
+    Dragonborn:'ドラゴンの血を引く人型種族。祖先のドラゴンの種類によって、ブレスや耐性の属性が変わる。',
+    Dwarf:'頑丈で粘り強い種族。暗闇での視認や毒への強さ、石造物に関する感覚などを持つ。',
+    Elf:'長命で鋭い感覚を持つ種族。系統によって得意な魔法や能力が変わる。',
+    Gnome:'小柄で魔法への抵抗力に優れる種族。系統によって自然寄り・工作寄りの能力が変わる。',
+    Goliath:'巨人の血を引く大柄な種族。移動が速く、選ぶ巨人の祖先によって特殊能力が変わる。',
+    Halfling:'小柄で幸運に恵まれ、恐怖にも強い種族。大きな相手の間をすり抜けやすい。',
+    Human:'柔軟で多才な種族。追加の技能習熟とOrigin Featを得られる。',
+    Orc:'力強く粘り強い種族。素早く踏み込み、倒れそうな時にも踏みとどまりやすい。',
+    Tiefling:'下方世界の影響を受けた種族。系統によって耐性や使える魔法が変わる。'
+  },
+  speciesTraits:{
+    Dragonborn:['Darkvision（暗視）','Draconic Ancestry（竜の祖先）','Breath Weapon（ブレス攻撃）','Damage Resistance（祖先に応じた耐性）'],
+    Dwarf:['Darkvision（暗視）','Dwarven Resilience（毒への強さ）','Dwarven Toughness（頑健）','Stonecunning（石造物への感覚）'],
+    Elf:['Darkvision（暗視）','Elven Lineage（エルフの系統）','Fey Ancestry（フェイの血統）','Keen Senses（鋭い感覚）','Trance（トランス）'],
+    Gnome:['Darkvision（暗視）','Gnomish Cunning（魔法への抵抗力）','Gnomish Lineage（ノームの系統）'],
+    Goliath:['Giant Ancestry（巨人の祖先）','Powerful Build（力強い体格）','移動速度35 ft.'],
+    Halfling:['Brave（恐怖への強さ）','Halfling Nimbleness（すり抜け）','Luck（幸運）','Naturally Stealthy（隠れやすさ）'],
+    Human:['Resourceful（機転）','Skillful（追加技能習熟）','Versatile（追加Origin Feat）'],
+    Orc:['Adrenaline Rush（素早い踏み込み）','Darkvision（暗視）','Relentless Endurance（倒れにくさ）'],
+    Tiefling:['Darkvision（暗視）','Fiendish Legacy（魔族の系統）','Otherworldly Presence（超自然的な存在感）']
+  },
+  backgrounds:{
+    Acolyte:'寺院や信仰の場で仕え、宗教や儀式を学んできた人。',
+    Criminal:'盗みや裏社会など、法の外側で生きる術を身につけてきた人。',
+    Sage:'本や研究に多くの時間を使い、知識を蓄えてきた人。',
+    Soldier:'軍事訓練を受け、戦場や軍隊で経験を積んできた人。'
+  },
+  terms:{'Cantrip':'キャントリップ（初級呪文）','Skill Proficiency':'技能習熟','Origin Feat':'オリジン特技','Background':'背景・出自','Species':'種族','Language':'言語','Common':'共通語'},
+  featureDescriptions:{
+    'Rage':'激怒して戦う。近接戦闘で攻撃力と耐久力を高めるバーバリアンの中核能力。',
+    'Unarmored Defense':'防具を着なくても能力値からACを計算できる。',
+    'Bardic Inspiration':'仲間を励まし、判定を助けるバードの支援能力。',
+    'Spellcasting':'呪文を使えるようになる。',
+    'Druidic':'ドルイドだけが知る秘密の言語を使える。',
+    'Second Wind':'自分自身のHPを回復して立て直す。',
+    'Martial Arts':'素手やモンク武器で素早く戦うための能力。',
+    'Lay On Hands':'触れて仲間や自分を回復するパラディンの能力。',
+    "Favored Enemy (Hunter's Mark)":'Hunter’s Markを使い、狙った敵を追跡・攻撃しやすくする。',
+    'Sneak Attack':'条件を満たした攻撃で追加ダメージを与えるローグの主力能力。',
+    "Thieves' Cant":'ローグたちが使う隠語や符号を理解できる。',
+    'Innate Sorcery':'内なる魔力を解放して、ソーサラーの呪文を強化する。',
+    'Pact Magic':'契約によって得た独自の呪文スロットで魔法を使う。',
+    'Ritual Adept':'呪文書にある儀式呪文を、条件を満たせば準備していなくても儀式として使える。',
+    'Arcane Recovery':'休息時に一部の呪文スロットを回復できる。'
+  },
+  classGroupDescriptions:{
+    weaponMastery:'使い慣れた武器を選び、その武器のMastery特性を使えるようにする。',
+    instrumentProficiencies:'扱いに習熟する楽器を選ぶ。',
+    divineOrder:'クレリックとして、武装を重視するか魔法を重視するかを選ぶ。',
+    primalOrder:'ドルイドとして、魔法を重視するか武装を重視するかを選ぶ。',
+    fightingStyle:'得意な戦い方を1つ選ぶ。',
+    toolProficiency:'習熟する道具または楽器を1つ選ぶ。',
+    expertise:'すでに習熟している技能の中から、さらに得意にする技能を選ぶ。',
+    thievesCantLanguage:'Thieves’ Cantに加えて知る追加言語を選ぶ。',
+    eldritchInvocation:'契約から得る特殊能力を1つ選ぶ。',
+    cantrips:'呪文スロットを使わず、基本的に何度でも使える基本魔法を選ぶ。',
+    spellbook:'ウィザードの呪文書に書き込むレベル1呪文を選ぶ。ここに入れた呪文の中から準備する呪文を選ぶ。',
+    preparedSpells:'冒険中にすぐ使えるよう準備しておく呪文を選ぶ。'
+  },
+  spells:{
+    'Acid Splash':['酸のしぶき','酸を飛ばして敵を攻撃する。'],
+    'Chill Touch':['冷たい死の手','死霊の力で遠くの敵を攻撃し、回復を妨げる。'],
+    'Dancing Lights':['踊る光','小さな光を複数作り、移動させられる。'],
+    'Elementalism':['元素操作','火・水・風・土など小規模な元素現象を起こす。'],
+    'Fire Bolt':['火炎弾','遠くの敵へ炎を飛ばして攻撃する。'],
+    'Light':['ライト','物体を明るく光らせる。'],
+    'Mage Hand':['魔法の手','離れた場所に魔法の手を作り、軽い物を動かす。'],
+    'Mending':['修理','壊れた物の小さな破損を魔法で直す。'],
+    'Message':['伝言','離れた相手に小声のメッセージを届ける。'],
+    'Minor Illusion':['小幻影','小さな音や映像の幻を作る。'],
+    'Poison Spray':['毒噴射','近くの敵へ毒を吹きかけて攻撃する。'],
+    'Prestidigitation':['小奇術','火花、匂い、汚れ落としなど小さな魔法効果を起こす。'],
+    'Ray of Frost':['冷気光線','冷気の光線で攻撃し、相手の移動を鈍らせる。'],
+    'Shocking Grasp':['電撃接触','触れた敵へ電撃を与え、離れやすくする。'],
+    'Sorcerous Burst':['魔力爆発','選んだ属性の魔力を放って攻撃する。'],
+    'True Strike':['必中の一撃','魔法で武器攻撃を強化する。'],
+    'Vicious Mockery':['悪意ある嘲り','言葉の魔力で敵を傷つけ、次の攻撃を邪魔する。'],
+    'Starry Wisp':['星の火','星のような光で遠くの敵を攻撃する。'],
+    'Druidcraft':['ドルイドの小奇術','天候の兆しや植物の開花など小さな自然魔法を起こす。'],
+    'Guidance':['ガイダンス','味方の能力判定を助ける。'],
+    'Resistance':['抵抗','味方のセーヴィング・スローを助ける。'],
+    'Sacred Flame':['聖なる炎','聖なる光で敵を攻撃する。'],
+    'Spare the Dying':['救命','瀕死の相手を安定化させる。'],
+    'Thaumaturgy':['奇跡の小技','声を響かせるなど小さな神聖現象を起こす。'],
+    'Produce Flame':['火炎生成','手に炎を作り、明かりや攻撃に使う。'],
+    'Shillelagh':['シレイリ','棍棒や杖を魔法で強化して戦いやすくする。'],
+    'Eldritch Blast':['怪光線','魔力の光線で遠くの敵を攻撃するウォーロックの代表的な魔法。'],
+    'Alarm':['警報','指定した場所に侵入者が入ると知らせる。'],
+    'Animal Friendship':['動物との友情','動物を敵対しにくくして意思疎通しやすくする。'],
+    'Bane':['災い','複数の敵の攻撃やセーヴを失敗しやすくする。'],
+    'Bless':['祝福','複数の味方の攻撃やセーヴを成功しやすくする。'],
+    'Burning Hands':['火炎の手','目の前に扇状の炎を放つ。'],
+    'Charm Person':['人物魅了','人型の相手を一時的に友好的にする。'],
+    'Chromatic Orb':['色彩の球','選んだ属性の魔法球を飛ばして攻撃する。'],
+    'Color Spray':['色彩噴射','まばゆい色の光で敵の視界を奪う。'],
+    'Command':['命令','短い命令を魔法で相手に実行させる。'],
+    'Comprehend Languages':['言語理解','知らない言語の意味を理解できるようにする。'],
+    'Create or Destroy Water':['水の生成・消去','水を作る、または消す。'],
+    'Cure Wounds':['傷治療','触れた相手のHPを回復する。'],
+    'Detect Evil and Good':['善悪感知','特定の超自然的存在や聖別・冒涜された場所を感知する。'],
+    'Detect Magic':['魔法感知','近くにある魔法の気配を見つける。'],
+    'Detect Poison and Disease':['毒と病気の感知','近くの毒・毒性生物・病気を感知する。'],
+    'Disguise Self':['変装','自分の外見を魔法で別人のように見せる。'],
+    'Dissonant Whispers':['不協和の囁き','恐ろしい囁きで敵を傷つけ、逃げさせる。'],
+    'Divine Favor':['神の恩寵','自分の武器攻撃に神聖な力を加える。'],
+    'Divine Smite':['神聖なる一撃','武器で命中した敵に追加の神聖ダメージを与える。'],
+    'Ensnaring Strike':['絡みつく一撃','武器攻撃に植物の拘束効果を加える。'],
+    'Entangle':['絡みつく植物','地面から植物を生やし、範囲内の敵を拘束する。'],
+    'Expeditious Retreat':['迅速退却','素早く移動し続けられるようにする。'],
+    'Faerie Fire':['妖精の火','範囲内の相手を光らせ、攻撃を当てやすくする。'],
+    'False Life':['偽りの生命','一時的なHPを得て打たれ強くなる。'],
+    'Feather Fall':['羽のような落下','落下速度を遅くして落下ダメージを防ぐ。'],
+    'Find Familiar':['使い魔召喚','小動物の姿をした魔法の使い魔を呼び出す。'],
+    'Floating Disk':['浮遊円盤','荷物を運ぶ浮遊する円盤を作る。'],
+    'Fog Cloud':['霧の雲','濃い霧を作り、視界を遮る。'],
+    'Goodberry':['グッドベリー','食べると少し回復し、食料にもなる実を作る。'],
+    'Grease':['油','地面を滑りやすくして転倒させやすくする。'],
+    'Guiding Bolt':['導きの矢','光の矢で攻撃し、次の攻撃を当てやすくする。'],
+    'Healing Word':['癒やしの言葉','離れた味方を言葉の魔法で回復する。'],
+    'Hellish Rebuke':['地獄の叱責','攻撃してきた相手へ炎で反撃する。'],
+    'Heroism':['英雄化','味方を恐怖に強くし、一時的なHPを与える。'],
+    'Hex':['呪い','敵を呪い、攻撃時の追加ダメージなどを与える。'],
+    'Hideous Laughter':['恐ろしい笑い','敵を笑い転げさせて行動しにくくする。'],
+    "Hunter's Mark":['狩人の印','敵に印を付け、追跡しやすくして武器攻撃を強化する。'],
+    'Ice Knife':['氷のナイフ','氷の刃を投げ、命中後に冷気を爆発させる。'],
+    'Identify':['鑑定','魔法の品や魔法効果の性質を調べる。'],
+    'Illusory Script':['幻の書状','読む相手によって内容が違って見える秘密の文章を書く。'],
+    'Inflict Wounds':['負傷付与','触れた敵に強い死霊ダメージを与える。'],
+    'Jump':['跳躍','対象のジャンプ力を大きく高める。'],
+    'Longstrider':['健脚','対象の移動速度を上げる。'],
+    'Mage Armor':['魔法の鎧','防具を着ていない対象を魔法で守り、ACを上げる。'],
+    'Magic Missile':['魔法の矢','自動的に命中する魔法の矢を複数放つ。'],
+    'Protection from Evil and Good':['善悪からの保護','特定の超自然的存在から対象を守る。'],
+    'Purify Food and Drink':['飲食物浄化','食べ物や飲み物の毒や腐敗を取り除く。'],
+    'Ray of Sickness':['病の光線','毒性の光線で敵を攻撃し、毒状態にすることがある。'],
+    'Sanctuary':['聖域','対象を攻撃しにくくする神聖な守りを与える。'],
+    'Searing Smite':['灼熱の一撃','次の武器攻撃に炎を加え、敵を燃やす。'],
+    'Shield':['シールド','攻撃を受けそうな瞬間に魔法の防壁を作り、ACを上げる。'],
+    'Shield of Faith':['信仰の盾','味方を神聖な力で守り、ACを上げる。'],
+    'Silent Image':['静かな幻影','動かせる視覚的な幻を作る。'],
+    'Sleep':['睡眠','魔法で相手を眠らせる。'],
+    'Speak with Animals':['動物会話','動物と会話できるようになる。'],
+    'Thunderwave':['雷鳴波','自分の前方へ衝撃波を放ち、敵を押し飛ばす。'],
+    'Unseen Servant':['見えざる従者','簡単な作業をする見えない従者を作る。']
+  },
+  spell(value){const v=this.spells?.[value];return v?{label:`${value}（${v[0]}）`,desc:v[1]}:{label:value,desc:''};},
+  label(value,group){const m=this[group]||{};return m[value]?`${value}（${m[value]}）`:value;}
 };
-
-setTimeout(()=>{
-  const sel=document.getElementById('className');
-  const info=document.getElementById('classInfo');
-  const equip=document.getElementById('classEquipment');
-  if(!sel||!info||!equip)return;
-
-  document.getElementById('classBeginnerGuide')?.remove();
-  document.querySelectorAll('.class-pick-grid,.class-more,.class-long-desc,.class-choice-layout').forEach(x=>x.remove());
-
-  const panel=sel.closest('.step-panel');
-  const title=panel.querySelector('.section-title');
-  const lead=panel.querySelector('.lead');
-  const field=sel.closest('.field');
-  const equipTitle=equip.previousElementSibling;
-  const errorBox=document.getElementById('errorBox');
-  const next=document.getElementById('nextBtn');
-  const prev=document.getElementById('prevBtn');
-  const panels=[...document.querySelectorAll('.step-panel')];
-
-  document.getElementById('dd-new-mobile-font-fix')?.remove();
-  const st=document.createElement('style');
-  st.id='dd-new-mobile-font-fix';
-  st.textContent=`
-    body{font-size:13px!important;line-height:1.38!important}
-    header h1{font-size:17px!important}
-    .rules-note{font-size:12px!important;line-height:1.35!important;margin:4px 0 7px!important}
-    .section-title{font-size:16px!important;margin:0 0 4px!important}
-    .lead{font-size:12px!important;line-height:1.35!important;margin:0 0 6px!important}
-    .subhead{font-size:15px!important;margin:10px 0 5px!important}
-    .field{font-size:13px!important;margin-bottom:8px!important}
-    .info-box{font-size:12px!important;line-height:1.32!important;gap:2px!important;padding:7px!important;margin:0!important}
-    .info-box strong{font-size:14px!important}
-    .check-card,.radio-card{padding:7px!important;min-height:46px!important}
-    .check-card span,.radio-card span{font-size:13px!important}
-    .check-card small,.radio-card small{font-size:12px!important}
-    .nav-actions button{font-size:13px!important;min-height:45px!important}
-    .steps{grid-template-columns:repeat(7,minmax(0,1fr))!important;gap:2px!important;margin:0 0 8px!important}
-    .step-dot,.pseudo-step-dot{min-height:37px;border:1px solid #4f4436;background:#1d1915;color:#b9aa95;font-size:10px!important;display:grid;place-items:center;text-align:center;padding:2px!important}
-    .step-dot.active,.pseudo-step-dot.active{border-color:var(--accent);color:var(--text);background:#332a20}
-    .step-dot.done,.pseudo-step-dot.done{color:#cdb991;border-color:#806b50}
-    .class-choice-layout{display:grid;grid-template-columns:34% 66%;gap:6px;align-items:start;margin-top:5px}
-    .class-choice-layout[hidden],#classEquipment[hidden]{display:none!important}
-    .class-pick-list{display:grid;grid-template-columns:1fr;gap:4px}
-    .class-pick{width:100%;min-height:31px;border:1px solid var(--line);background:#191611;color:var(--text);font:inherit;font-size:11.5px;padding:4px 3px;text-align:center;line-height:1.2}
-    .class-pick.active{border-color:var(--accent);background:#3a3025;color:var(--accent)}
-    .class-detail-box{min-height:100%;align-content:start}
-    .class-detail-name{display:block;color:var(--accent);font-size:14px;font-weight:700;margin-bottom:4px}
-    .class-detail-primary{display:block;color:var(--text);font-size:12.5px;font-weight:700;margin-bottom:5px}
-    .class-detail-meta{display:block;margin:0 0 3px}
-    .class-detail-desc{border-top:1px solid #514535;margin-top:6px;padding-top:6px;display:grid;gap:5px}
-    .class-detail-desc p{margin:0;font-size:12px;line-height:1.38}
-    .class-detail-desc b{color:#eadbc6}
-    @media(max-width:380px){.class-choice-layout{grid-template-columns:36% 64%}.class-pick{font-size:11px}.class-detail-name{font-size:13px}}
-  `;
-  document.head.appendChild(st);
-
-  field.style.display='none';
-
-  const steps=document.querySelector('.steps');
-  steps.innerHTML=[
-    '<div class="step-dot">1<br>クラス</div>',
-    '<div class="pseudo-step-dot">2<br>装備</div>',
-    '<div class="step-dot">3<br>出自</div>',
-    '<div class="step-dot">4<br>詳細</div>',
-    '<div class="step-dot">5<br>能力</div>',
-    '<div class="step-dot">6<br>属性</div>',
-    '<div class="step-dot">7<br>仕上げ</div>'
-  ].join('');
-  const visualDots=[...steps.children];
-  function setProgress(index){
-    visualDots.forEach((dot,i)=>{
-      dot.classList.toggle('active',i===index);
-      dot.classList.toggle('done',i<index);
-    });
-  }
-
-  const layout=document.createElement('div');
-  layout.className='class-choice-layout';
-  const list=document.createElement('div');
-  list.className='class-pick-list';
-  field.after(layout);
-  layout.append(list,info);
-  info.classList.add('class-detail-box');
-
-  const abilityJa={Strength:'筋力',Dexterity:'敏捷力',Constitution:'耐久力',Intelligence:'知力',Wisdom:'判断力',Charisma:'魅力'};
-  const bi=v=>abilityJa[v]?`${v}（${abilityJa[v]}）`:v;
-  const guides={
-    Barbarian:['怒りの力で前線に立つ、丈夫な近接戦士です。','Rage（激怒）を使って耐えながら、大きな武器で攻撃します。','初心者向け。近接戦闘の基本を覚えやすいです。'],
-    Bard:['音楽・話術・魔法を使える万能型です。','仲間を助け、攻撃・回復・妨害の魔法を使います。','できることが多いぶん、覚えることはやや多めです。'],
-    Cleric:['神聖な力を使う魔法戦士です。','回復・支援・攻撃を使い分け、前線にも立てます。','魔法と戦闘の両方を覚えたい人向けです。'],
-    Druid:['自然の力を使う魔法使いです。','攻撃・回復・地形妨害などを状況に合わせて使います。','魔法の種類が多く、覚える量は多めです。'],
-    Fighter:['武器と防具の扱いに優れた戦士です。','武器攻撃を中心に戦い、自分を回復する能力もあります。','ACや攻撃ロールなど戦闘の基本を覚えやすいです。'],
-    Monk:['素早い身のこなしと格闘で戦う武術家です。','素手や軽い武器、高い機動力を使います。','防具なしで戦う仕組みに少し慣れが必要です。'],
-    Paladin:['重装備と神聖魔法を組み合わせる騎士です。','武器と盾で前線に立ち、回復や強化も行います。','戦士として動きながら魔法も覚えたい人向けです。'],
-    Ranger:['探索と武器戦闘に強い野外の専門家です。','弓や近接武器で戦い、少し魔法も使います。','戦闘と探索の両方を覚えたい人向けです。'],
-    Rogue:['隠密・鍵開け・罠・急所攻撃など技能で切り抜ける専門家です。','Sneak Attack（急所攻撃）で大きな一撃を狙います。','技能判定を覚えるのに向いています。'],
-    Sorcerer:['生まれつき自分の中に魔力を持つ魔法使いです。','覚えた呪文を自分の魔力で強く使います。','ウィザードより呪文管理は軽めです。'],
-    Warlock:['強大な存在との契約によって力を得る魔法使いです。','独自の魔法と能力を組み合わせて戦います。','独自ルールが多めなので少し慣れが必要です。'],
-    Wizard:['勉強と研究によって魔法を身につける魔法使いです。','Spellbook（呪文書）から状況に合う呪文を選びます。','できることは多いですが、覚える量も多めです。']
-  };
-
-  function renderInfo(){
-    const c=window.DD_SRD_CHARACTER?.classes?.[sel.value];
-    if(!c)return;
-    const g=guides[sel.value]||['','',''];
-    info.innerHTML=`<span class="class-detail-name">${c.ja} / ${sel.value}</span><span class="class-detail-primary">主要能力：${String(c.primary).split(' / ').map(bi).join(' / ')}</span><span class="class-detail-meta">Hit Die（ヒット・ダイス）：D${c.hitDie}</span><span class="class-detail-meta">Saving Throws（セーヴ習熟）：${c.saves.map(bi).join(' / ')}</span><span class="class-detail-meta">Class Skills（クラス技能）：${c.skillCount}個</span><div class="class-detail-desc"><p>${g[0]}</p><p><b>戦闘：</b>${g[1]}</p><p><b>初心者：</b>${g[2]}</p></div>`;
-  }
-
-  function renderButtons(){
-    list.innerHTML='';
-    [...sel.options].forEach(o=>{
-      const b=document.createElement('button');
-      b.type='button';
-      b.className='class-pick'+(o.value===sel.value?' active':'');
-      b.textContent=window.DD_SRD_CHARACTER?.classes?.[o.value]?.ja||o.value;
-      b.addEventListener('click',()=>{
-        sel.value=o.value;
-        sel.dispatchEvent(new Event('change',{bubbles:true}));
-        setTimeout(()=>{renderButtons();renderInfo();},0);
-      });
-      list.appendChild(b);
-    });
-  }
-
-  let equipmentPage=false;
-  let returnToEquipment=false;
-
-  function clearPseudoError(){if(errorBox){errorBox.textContent='';errorBox.hidden=true;}}
-
-  function showClass(){
-    equipmentPage=false;
-    title.textContent='1. クラスを選ぶ';
-    lead.hidden=false;
-    layout.hidden=false;
-    equipTitle.hidden=true;
-    equip.hidden=true;
-    panel.classList.remove('class-equipment-page');
-    renderButtons();
-    renderInfo();
-    prev.hidden=true;
-    setProgress(0);
-    clearPseudoError();
-    window.scrollTo(0,0);
-  }
-
-  function showEquipment(){
-    equipmentPage=true;
-    title.textContent='2. Starting Equipment（開始装備）';
-    lead.hidden=true;
-    layout.hidden=true;
-    equipTitle.hidden=false;
-    equipTitle.textContent='Starting Equipment（開始装備）';
-    equip.hidden=false;
-    panel.classList.add('class-equipment-page');
-    prev.hidden=false;
-    setProgress(1);
-    clearPseudoError();
-    window.scrollTo(0,0);
-  }
-
-  showClass();
-
-  next.addEventListener('click',e=>{
-    if(!panel.hidden&&!equipmentPage){
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      showEquipment();
-    }
-  },true);
-
-  prev.addEventListener('click',e=>{
-    if(!panel.hidden&&equipmentPage){
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      showClass();
-      return;
-    }
-    const visible=panels.findIndex(p=>!p.hidden);
-    if(visible===1)returnToEquipment=true;
-  },true);
-
-  function sync(){
-    const visible=panels.findIndex(p=>!p.hidden);
-    if(visible===0){
-      if(returnToEquipment){returnToEquipment=false;setTimeout(showEquipment,0);}
-      else setProgress(equipmentPage?1:0);
-      return;
-    }
-    if(visible>0)setProgress(visible+1);
-  }
-
-  const observer=new MutationObserver(sync);
-  panels.forEach(p=>observer.observe(p,{attributes:true,attributeFilter:['hidden']}));
-},0);
