@@ -44,9 +44,15 @@ window.DD_ORIGIN_OPTIONS = (() => {
 
 (() => {
   if (typeof document === 'undefined') return;
-  if ([...document.scripts].some(s => (s.getAttribute('src') || '').includes('dd-class-guide.js'))) return;
-  const script = document.createElement('script');
-  script.src = 'js/dd-class-guide.js?v=20260830-3';
-  script.async = true;
-  document.head.appendChild(script);
+
+  function loadOnce(src, marker) {
+    if ([...document.scripts].some(s => (s.getAttribute('src') || '').includes(marker))) return;
+    const script = document.createElement('script');
+    script.src = src;
+    script.async = true;
+    document.head.appendChild(script);
+  }
+
+  loadOnce('js/dd-class-guide.js?v=20260830-3', 'dd-class-guide.js');
+  loadOnce('js/dd-human-skill-filter.js?v=20260831-1', 'dd-human-skill-filter.js');
 })();
